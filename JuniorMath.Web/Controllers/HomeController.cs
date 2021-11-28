@@ -6,8 +6,8 @@ using JuniorMath.Web.Models;
 using Microsoft.AspNetCore.Http;
 using JuniorMath.ApplicationCore.Domain.User;
 //using JuniorMath.ApplicationCore.Interfaces.Services.ThirdParty.PaymentGateway.Common;
-using JuniorMath.ApplicationCore.DTOs.ThirdPartyService.PaymentGateway.Helcim;
-using JuniorMath.ApplicationCore.DTOs.ThirdPartyService.PaymentGateway.Common;
+//using JuniorMath.ApplicationCore.DTOs.ThirdPartyService.PaymentGateway.Helcim;
+//using JuniorMath.ApplicationCore.DTOs.ThirdPartyService.PaymentGateway.Common;
 using Microsoft.Azure.Search;
 using Microsoft.Azure.Search.Models;
 using System.Collections.Generic;
@@ -298,20 +298,20 @@ namespace JuniorMath.Web.Controllers
 
             ////var result = _helcimPaymentService.ProcessPayment(request);
 
-            var request = new HelcimBasicRequestModel()
-            {
-                AccountId = "2500318950",
-                ApiToken = "NXK54k3T92M433HK2ec6fFgJS",
-                TransactionId = "3995866",
-                Amount = 20,
-                CreditCard = new HelcimCreditCardRequestModel()
-                {
-                    CardHolderName = "Jane Smith",
-                    cardNumber = "5454545454545454",
-                    cardExpiry = "1020",
-                    cardCVV = "100",
-                }
-            };
+            //var request = new HelcimBasicRequestModel()
+            //{
+            //    AccountId = "2500318950",
+            //    ApiToken = "NXK54k3T92M433HK2ec6fFgJS",
+            //    TransactionId = "3995866",
+            //    Amount = 20,
+            //    CreditCard = new HelcimCreditCardRequestModel()
+            //    {
+            //        CardHolderName = "Jane Smith",
+            //        cardNumber = "5454545454545454",
+            //        cardExpiry = "1020",
+            //        cardCVV = "100",
+            //    }
+            //};
 
          //   var result = _helcimPaymentService.ProcessRefund(request);
         }
