@@ -25,7 +25,7 @@ namespace JuniorMath.Infrastructure.Data
         public virtual DbSet<Region> Region { get; set; }
         public virtual DbSet<SiteUser> SiteUser { get; set; }
         public virtual DbSet<SiteUserLevel> SiteUserLevel { get; set; }
-       
+        public virtual DbSet<Class> Class { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 //            if (!optionsBuilder.IsConfigured)
