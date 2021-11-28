@@ -6,18 +6,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Identity\Services\**" />
     <Compile Remove="Data\**" />
     <Compile Remove="Extensions\**" />
     <Compile Remove="HealthChecks\**" />
     <Compile Remove="Pages\**" />
+    <Content Remove="Areas\Identity\Services\**" />
     <Content Remove="Data\**" />
     <Content Remove="Extensions\**" />
     <Content Remove="HealthChecks\**" />
     <Content Remove="Pages\**" />
+    <EmbeddedResource Remove="Areas\Identity\Services\**" />
     <EmbeddedResource Remove="Data\**" />
     <EmbeddedResource Remove="Extensions\**" />
     <EmbeddedResource Remove="HealthChecks\**" />
     <EmbeddedResource Remove="Pages\**" />
+    <None Remove="Areas\Identity\Services\**" />
     <None Remove="Data\**" />
     <None Remove="Extensions\**" />
     <None Remove="HealthChecks\**" />
@@ -34,12 +38,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Identity\Services\" />
     <Folder Include="wwwroot\js\views\SiteUser\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\Emails\ConfirmAccount\ConfirmAccountEmail.cshtml" />
     <None Include="wwwroot\images\banner1.svg" />
     <None Include="wwwroot\images\banner2.svg" />
     <None Include="wwwroot\images\banner3.svg" />
@@ -95,9 +97,6 @@
 
   <ItemGroup>
     <Content Update="Areas\Identity\Pages\Account\Manage\_ViewStart.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Views\Item\ItemForm.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>

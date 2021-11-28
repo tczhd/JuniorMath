@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using JuniorMath.Web.Models;
 using Microsoft.AspNetCore.Http;
 using JuniorMath.ApplicationCore.Domain.User;
-using JuniorMath.ApplicationCore.Interfaces.Services.ThirdParty.PaymentGateway.Common;
+//using JuniorMath.ApplicationCore.Interfaces.Services.ThirdParty.PaymentGateway.Common;
 using JuniorMath.ApplicationCore.DTOs.ThirdPartyService.PaymentGateway.Helcim;
 using JuniorMath.ApplicationCore.DTOs.ThirdPartyService.PaymentGateway.Common;
 using Microsoft.Azure.Search;
@@ -29,11 +29,10 @@ namespace JuniorMath.Web.Controllers
 
         public static string errorMessage;
 
-        private readonly IThirdPartyPaymentService _helcimPaymentService;
-        public HomeController(UserHandler userHandler, IThirdPartyPaymentService helcimPaymentService, IOptions<SiteSettingsOptions> siteSettingsOptions)
+      //  private readonly IThirdPartyPaymentService _helcimPaymentService;
+        public HomeController(UserHandler userHandler, IOptions<SiteSettingsOptions> siteSettingsOptions)
             : base(userHandler)
         {
-            _helcimPaymentService = helcimPaymentService;
             _siteSettingsOptions = siteSettingsOptions.Value;
         }
 
@@ -314,7 +313,7 @@ namespace JuniorMath.Web.Controllers
                 }
             };
 
-            var result = _helcimPaymentService.ProcessRefund(request);
+         //   var result = _helcimPaymentService.ProcessRefund(request);
         }
     }
 }

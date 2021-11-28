@@ -6,12 +6,14 @@
 
   <ItemGroup>
     <Compile Remove="Exceptions\**" />
+    <Compile Remove="Interfaces\Logging\**" />
     <EmbeddedResource Remove="Exceptions\**" />
+    <EmbeddedResource Remove="Interfaces\Logging\**" />
     <None Remove="Exceptions\**" />
+    <None Remove="Interfaces\Logging\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\Logging\" />
     <Folder Include="Services\Base\" />
   </ItemGroup>
 

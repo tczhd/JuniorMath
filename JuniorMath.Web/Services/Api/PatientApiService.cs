@@ -1,162 +1,162 @@
 ﻿
-using JuniorMath.ApplicationCore.Entities.PatientAggregate;
-using JuniorMath.ApplicationCore.Interfaces.Services.Patients;
-using JuniorMath.Web.Interfaces.Api;
-using JuniorMath.Web.ViewModels.Patients;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using JuniorMath.ApplicationCore.Entities.CommonAggregate;
-using System.Linq;
-using JuniorMath.ApplicationCore.DTOs.Patients;
-using JuniorMath.Web.Models.Patients;
-using JuniorMath.ApplicationCore.Domain.User;
-using JuniorMath.Web.Models;
-using JuniorMath.ApplicationCore.DTOs.Common;
+//using JuniorMath.ApplicationCore.Entities.PatientAggregate;
+//using JuniorMath.ApplicationCore.Interfaces.Services.Patients;
+//using JuniorMath.Web.Interfaces.Api;
+//using JuniorMath.Web.ViewModels.Patients;
+//using System;
+//using System.Collections.Generic;
+//using System.Threading.Tasks;
+//using JuniorMath.ApplicationCore.Entities.CommonAggregate;
+//using System.Linq;
+//using JuniorMath.ApplicationCore.DTOs.Patients;
+//using JuniorMath.Web.Models.Patients;
+//using JuniorMath.ApplicationCore.Domain.User;
+//using JuniorMath.Web.Models;
+//using JuniorMath.ApplicationCore.DTOs.Common;
 
-namespace JuniorMath.Web.Services.Api
-{
-    public class PatientApiService : IPatientApiService
-    {
-        public readonly IPatientService _patientService;
-        private readonly UserHandler _userHandler;
+//namespace JuniorMath.Web.Services.Api
+//{
+//    public class PatientApiService : IPatientApiService
+//    {
+//        public readonly IPatientService _patientService;
+//        private readonly UserHandler _userHandler;
 
-        public PatientApiService(IPatientService patientService, UserHandler userHandler)
-        {
-            _patientService = patientService;
-            _userHandler = userHandler;
-        }
+//        public PatientApiService(IPatientService patientService, UserHandler userHandler)
+//        {
+//            _patientService = patientService;
+//            _userHandler = userHandler;
+//        }
 
-        public PatientResultViewModel CreateNewPatient(List<PatientRequestModel> newPatients)
-        {
-            var result = new PatientResultViewModel();
+//        public PatientResultViewModel CreateNewPatient(List<PatientRequestModel> newPatients)
+//        {
+//            var result = new PatientResultViewModel();
 
-            try
-            {
-                var patients = new List<Patient>();
+//            try
+//            {
+//                var patients = new List<Patient>();
 
-                var family = new Family
-                {
-                    Name = newPatients[0].LastName
-                };
+//                var family = new Family
+//                {
+//                    Name = newPatients[0].LastName
+//                };
 
-                foreach (PatientRequestModel newPatient in newPatients)
-                {
-                    var userContext = _userHandler.GetUserContext();
-                    var patient = new Patient();
+//                foreach (PatientRequestModel newPatient in newPatients)
+//                {
+//                    var userContext = _userHandler.GetUserContext();
+//                    var patient = new Patient();
 
-                    patient.Address = new Address()
-                    {
-                        CreatedDateUtc = DateTime.UtcNow,
-                        AddressTypeId = 1,
-                        Address1 = newPatient.Address1,
-                        Address2 = newPatient.Address2,
-                        AttentionTo = "",
-                        City = newPatient.City,
-                        CountryId = newPatient.CountryId,
-                        RegionId = newPatient.StateId,
-                        PostalCode = newPatient.PostalCode,
-                        CreatedBy = userContext.SiteUserId
-                    };
+//                    patient.Address = new Address()
+//                    {
+//                        CreatedDateUtc = DateTime.UtcNow,
+//                        AddressTypeId = 1,
+//                        Address1 = newPatient.Address1,
+//                        Address2 = newPatient.Address2,
+//                        AttentionTo = "",
+//                        City = newPatient.City,
+//                        CountryId = newPatient.CountryId,
+//                        RegionId = newPatient.StateId,
+//                        PostalCode = newPatient.PostalCode,
+//                        CreatedBy = userContext.SiteUserId
+//                    };
 
-                    patient.Id = newPatient.PatientId;
-                    patient.FirstName = newPatient.FirstName;
-                    patient.LastName = newPatient.LastName;
-                    patient.ClinicId = userContext.ClinicId;
-                    patient.Age = 30;
-                    patient.Status = 1;
-                    patient.Title = "Mr.";
-                    patient.Gender = 1;
-                    patient.Phone = newPatient.Phone;
-                    patient.Email = newPatient.Email;
-                    patient.CreatedDateUtc = DateTime.UtcNow;
-                    patient.UpdatedDateUtc = DateTime.UtcNow;
-                    patient.CreatedBy = userContext.SiteUserId;
-                    patient.Family = family;
-                    patient.PrimaryMember = true;
-                    patient.Minor = false;
-                    patient.DoctorId = userContext.DoctorId ?? 0;
+//                    patient.Id = newPatient.PatientId;
+//                    patient.FirstName = newPatient.FirstName;
+//                    patient.LastName = newPatient.LastName;
+//                    patient.ClinicId = userContext.ClinicId;
+//                    patient.Age = 30;
+//                    patient.Status = 1;
+//                    patient.Title = "Mr.";
+//                    patient.Gender = 1;
+//                    patient.Phone = newPatient.Phone;
+//                    patient.Email = newPatient.Email;
+//                    patient.CreatedDateUtc = DateTime.UtcNow;
+//                    patient.UpdatedDateUtc = DateTime.UtcNow;
+//                    patient.CreatedBy = userContext.SiteUserId;
+//                    patient.Family = family;
+//                    patient.PrimaryMember = true;
+//                    patient.Minor = false;
+//                    patient.DoctorId = userContext.DoctorId ?? 0;
 
-                    patients.Add(patient);
-                }
+//                    patients.Add(patient);
+//                }
 
-                _patientService.CreatePatientAsync(patients);
+//                _patientService.CreatePatientAsync(patients);
 
-                result = new PatientResultViewModel { Success = true, Message = "Add patient success. ", PatienId = patients.First().Id };
+//                result = new PatientResultViewModel { Success = true, Message = "Add patient success. ", PatienId = patients.First().Id };
 
-            }
-            catch (Exception ex)
-            {
-                result.Success = false;
-                result.Message = ex.Message;
-            }
+//            }
+//            catch (Exception ex)
+//            {
+//                result.Success = false;
+//                result.Message = ex.Message;
+//            }
 
-            return result;
-        }
+//            return result;
+//        }
 
-        public PatientViewModel SearchPatient(int id)
-        {
-            var patient = _patientService.SearchPatientAsync(id);
-            if (patient != null)
-            {
-                var data = new PatientViewModel()
-                {
+//        public PatientViewModel SearchPatient(int id)
+//        {
+//            var patient = _patientService.SearchPatientAsync(id);
+//            if (patient != null)
+//            {
+//                var data = new PatientViewModel()
+//                {
 
-                    PatientId = patient.Id,
-                    Phone = patient.Phone,
-                    FirstName = patient.FirstName,
-                    LastName = patient.LastName,
-                    Email = patient.Email,
-                    Family = new FamilyViewModel
-                    {
-                        FamilyId = patient.FamilyId,
-                        FamilyName = patient.Family.Name
-                    },
-                    Address = new ViewModels.Adresses.AddressViewModel
-                    {
-                        Address1 = patient.Address.Address1,
-                        Address2 = patient.Address.Address2,
-                        City = patient.Address.City,
-                        CountryId = patient.Address.CountryId,
-                        RegionId = patient.Address.RegionId,
-                        PostalCode = patient.Address.PostalCode
-                    }
+//                    PatientId = patient.Id,
+//                    Phone = patient.Phone,
+//                    FirstName = patient.FirstName,
+//                    LastName = patient.LastName,
+//                    Email = patient.Email,
+//                    Family = new FamilyViewModel
+//                    {
+//                        FamilyId = patient.FamilyId,
+//                        FamilyName = patient.Family.Name
+//                    },
+//                    Address = new ViewModels.Adresses.AddressViewModel
+//                    {
+//                        Address1 = patient.Address.Address1,
+//                        Address2 = patient.Address.Address2,
+//                        City = patient.Address.City,
+//                        CountryId = patient.Address.CountryId,
+//                        RegionId = patient.Address.RegionId,
+//                        PostalCode = patient.Address.PostalCode
+//                    }
 
-                };
-                return data;
-            }
+//                };
+//                return data;
+//            }
 
-            return null;
-        }
+//            return null;
+//        }
 
-        public SearchPatientResultViewModel SearchPatients(WebSearchRequestModel searchequestModel)
-        {
-            var searchPatientFilter = searchequestModel.WebSearchRequestDetail.Select(p => new GenericSearchParameter
-            {
-                SearchType = p.SearchType,
-                SearchContent = p.SearchContent
-            }).ToList();
-            var data = _patientService.SearchPatientAsync(searchPatientFilter, searchequestModel.CurrentPage, WebSiteSettings.PageSize);
+//        public SearchPatientResultViewModel SearchPatients(WebSearchRequestModel searchequestModel)
+//        {
+//            var searchPatientFilter = searchequestModel.WebSearchRequestDetail.Select(p => new GenericSearchParameter
+//            {
+//                SearchType = p.SearchType,
+//                SearchContent = p.SearchContent
+//            }).ToList();
+//            var data = _patientService.SearchPatientAsync(searchPatientFilter, searchequestModel.CurrentPage, WebSiteSettings.PageSize);
 
-            var result = new SearchPatientResultViewModel()
-            {
-                Success = true,
-                Message = "Search patients success. ",
-                CurrentPage = searchequestModel.CurrentPage
-            };
+//            var result = new SearchPatientResultViewModel()
+//            {
+//                Success = true,
+//                Message = "Search patients success. ",
+//                CurrentPage = searchequestModel.CurrentPage
+//            };
 
-            result.PatientDetail = data.Select(p => new SearchPatientDetailResultViewModel
-            {
-                PatientAddress = $"{p.Address.Address1}, {p.Address.City} {p.Address.RegionNavigation.Name}",
-                PatientEmail = p.Email,
-                PatientName = $"{p.FirstName } {p.LastName}",
-                PatientPhone = p.Phone,
-                PatientStatus = p.CreatedDateUtc.ToString("MMM dd"),
-                PatientId = p.Id
-            }).ToList();
-            result.Count = _patientService.SearchPatientCountAsync(searchPatientFilter);
+//            result.PatientDetail = data.Select(p => new SearchPatientDetailResultViewModel
+//            {
+//                PatientAddress = $"{p.Address.Address1}, {p.Address.City} {p.Address.RegionNavigation.Name}",
+//                PatientEmail = p.Email,
+//                PatientName = $"{p.FirstName } {p.LastName}",
+//                PatientPhone = p.Phone,
+//                PatientStatus = p.CreatedDateUtc.ToString("MMM dd"),
+//                PatientId = p.Id
+//            }).ToList();
+//            result.Count = _patientService.SearchPatientCountAsync(searchPatientFilter);
 
-            return result;
-        }
-    }
-}
+//            return result;
+//        }
+//    }
+//}

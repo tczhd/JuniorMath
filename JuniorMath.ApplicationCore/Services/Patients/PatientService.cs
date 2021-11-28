@@ -1,158 +1,158 @@
-﻿using JuniorMath.ApplicationCore.Domain.User;
-using JuniorMath.ApplicationCore.DTOs.Common;
-using JuniorMath.ApplicationCore.DTOs.Patients;
-using JuniorMath.ApplicationCore.Entities.PatientAggregate;
-using JuniorMath.ApplicationCore.Interfaces.Repository;
-using JuniorMath.ApplicationCore.Interfaces.Services.Patients;
-using JuniorMath.ApplicationCore.Specifications.Patients;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using JuniorMath.ApplicationCore.Domain.User;
+//using JuniorMath.ApplicationCore.DTOs.Common;
+//using JuniorMath.ApplicationCore.DTOs.Patients;
+//using JuniorMath.ApplicationCore.Entities.PatientAggregate;
+//using JuniorMath.ApplicationCore.Interfaces.Repository;
+//using JuniorMath.ApplicationCore.Interfaces.Services.Patients;
+//using JuniorMath.ApplicationCore.Specifications.Patients;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
-namespace JuniorMath.ApplicationCore.Services.Patients
-{
-    public class PatientService : IPatientService
-    {
-        private readonly IRepository<Patient> _patientRepository;
-        private readonly UserHandler _userHandler;
-        private int _clinicId;
+//namespace JuniorMath.ApplicationCore.Services.Patients
+//{
+//    public class PatientService : IPatientService
+//    {
+//        private readonly IRepository<Patient> _patientRepository;
+//        private readonly UserHandler _userHandler;
+//        private int _clinicId;
 
-        public PatientService(IRepository<Patient> patientRepository, UserHandler userHandler)
-        {
-            _patientRepository = patientRepository;
-            _userHandler = userHandler;
-            var userContext = _userHandler.GetUserContext();
-            if (userContext != null)
-            {
-                _clinicId = userContext.ClinicId;
-            }
-        }
+//        public PatientService(IRepository<Patient> patientRepository, UserHandler userHandler)
+//        {
+//            _patientRepository = patientRepository;
+//            _userHandler = userHandler;
+//            var userContext = _userHandler.GetUserContext();
+//            if (userContext != null)
+//            {
+//                _clinicId = userContext.ClinicId;
+//            }
+//        }
 
-        public List<Patient> CreatePatientAsync(List<Patient> patients)
-        {
-            try
-            {
-                var family = patients.First().Family;
+//        public List<Patient> CreatePatientAsync(List<Patient> patients)
+//        {
+//            try
+//            {
+//                var family = patients.First().Family;
 
-                foreach (Patient patient in patients)
-                {
-                    if (patient.Id > 0)
-                    {
-                        var patientEntity = SearchPatientAsync(patient.Id);
-                        family = patientEntity.Family;
+//                foreach (Patient patient in patients)
+//                {
+//                    if (patient.Id > 0)
+//                    {
+//                        var patientEntity = SearchPatientAsync(patient.Id);
+//                        family = patientEntity.Family;
 
-                        patientEntity = CopyPatientData(patientEntity, patient);
-                        _patientRepository.UpdateOnly(patientEntity);
-                    }
-                    else
-                    {
-                        patient.Family = family;
-                        _patientRepository.AddOnly(patient);
-                    }
-                }
+//                        patientEntity = CopyPatientData(patientEntity, patient);
+//                        _patientRepository.UpdateOnly(patientEntity);
+//                    }
+//                    else
+//                    {
+//                        patient.Family = family;
+//                        _patientRepository.AddOnly(patient);
+//                    }
+//                }
 
-                _patientRepository.SaveAll();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Add patient failed: " + ex.Message);
-            }
+//                _patientRepository.SaveAll();
+//            }
+//            catch (Exception ex)
+//            {
+//                throw new Exception("Add patient failed: " + ex.Message);
+//            }
 
-            return patients;
-        }
+//            return patients;
+//        }
 
-        private Patient CopyPatientData(Patient patient, Patient soruce)
-        {
-            patient.Address.Address1 = soruce.Address.Address1;
-            patient.Address.Address2 = soruce.Address.Address2;
-            patient.Address.City = soruce.Address.City;
-            patient.Address.CountryId = soruce.Address.CountryId;
-            patient.Address.RegionId = soruce.Address.RegionId;
-            patient.Address.Address1 = soruce.Address.Address1;
-            patient.Address.PostalCode = soruce.Address.PostalCode;
+//        private Patient CopyPatientData(Patient patient, Patient soruce)
+//        {
+//            patient.Address.Address1 = soruce.Address.Address1;
+//            patient.Address.Address2 = soruce.Address.Address2;
+//            patient.Address.City = soruce.Address.City;
+//            patient.Address.CountryId = soruce.Address.CountryId;
+//            patient.Address.RegionId = soruce.Address.RegionId;
+//            patient.Address.Address1 = soruce.Address.Address1;
+//            patient.Address.PostalCode = soruce.Address.PostalCode;
 
-            patient.FirstName = soruce.FirstName;
-            patient.LastName = soruce.LastName;
-            patient.Phone = soruce.Phone;
-            patient.Email = soruce.Email;
+//            patient.FirstName = soruce.FirstName;
+//            patient.LastName = soruce.LastName;
+//            patient.Phone = soruce.Phone;
+//            patient.Email = soruce.Email;
 
-            return patient;
-        }
+//            return patient;
+//        }
 
-        public List<Patient> SearchPatientAsync(List<GenericSearchParameter> searchParameters, int currentPage, int pageSize)
-        {
-            var patientSpecification = GetPatientSpecification(searchParameters, currentPage, pageSize, false);
+//        public List<Patient> SearchPatientAsync(List<GenericSearchParameter> searchParameters, int currentPage, int pageSize)
+//        {
+//            var patientSpecification = GetPatientSpecification(searchParameters, currentPage, pageSize, false);
 
-            return _patientRepository.List(patientSpecification).ToList();
-        }
+//            return _patientRepository.List(patientSpecification).ToList();
+//        }
 
-        private PatientSpecification GetPatientSpecification(List<GenericSearchParameter> searchParameters, int currentPage, int pageSize, bool IsCount)
-        {
-            var patientSpecification = new PatientSpecification(_clinicId);
+//        private PatientSpecification GetPatientSpecification(List<GenericSearchParameter> searchParameters, int currentPage, int pageSize, bool IsCount)
+//        {
+//            var patientSpecification = new PatientSpecification(_clinicId);
 
-            foreach (var parameter in searchParameters)
-            {
-                if (parameter.SearchType == "first_name")
-                {
-                    patientSpecification.AddFirstName(parameter.SearchContent);
-                }
-                else if (parameter.SearchType == "last_name")
-                {
-                    patientSpecification.AddLastName(parameter.SearchContent);
-                }
-            }
+//            foreach (var parameter in searchParameters)
+//            {
+//                if (parameter.SearchType == "first_name")
+//                {
+//                    patientSpecification.AddFirstName(parameter.SearchContent);
+//                }
+//                else if (parameter.SearchType == "last_name")
+//                {
+//                    patientSpecification.AddLastName(parameter.SearchContent);
+//                }
+//            }
 
-            if (!IsCount)
-            {
-                patientSpecification.AddPagination(currentPage, pageSize);
-            }
+//            if (!IsCount)
+//            {
+//                patientSpecification.AddPagination(currentPage, pageSize);
+//            }
 
-            return patientSpecification;
-        }
+//            return patientSpecification;
+//        }
 
-        public Patient SearchPatientAsync(int id)
-        {
-            var patientSpecification = new PatientSpecification(_clinicId);
-            patientSpecification.AddPatientId(id);
+//        public Patient SearchPatientAsync(int id)
+//        {
+//            var patientSpecification = new PatientSpecification(_clinicId);
+//            patientSpecification.AddPatientId(id);
 
-            return _patientRepository.GetSingleBySpec(patientSpecification);
-        }
+//            return _patientRepository.GetSingleBySpec(patientSpecification);
+//        }
 
-        public PatientModel SearchPatientModelAsync(int id)
-        {
-            var patientSpecification = new PatientSpecification(_clinicId);
-            patientSpecification.AddPatientId(id);
-            var data = _patientRepository.GetSingleBySpec(patientSpecification);
+//        public PatientModel SearchPatientModelAsync(int id)
+//        {
+//            var patientSpecification = new PatientSpecification(_clinicId);
+//            patientSpecification.AddPatientId(id);
+//            var data = _patientRepository.GetSingleBySpec(patientSpecification);
 
-            if (data != null)
-            {
-                return data;
-            }
+//            if (data != null)
+//            {
+//                return data;
+//            }
 
-            return null;
+//            return null;
 
-        }
+//        }
 
-        public List<PatientModel> SearchPatientsAsync(int familyId)
-        {
-            var patientSpecification = new PatientSpecification(_clinicId);
-            patientSpecification.AddfamilyId(familyId);
+//        public List<PatientModel> SearchPatientsAsync(int familyId)
+//        {
+//            var patientSpecification = new PatientSpecification(_clinicId);
+//            patientSpecification.AddfamilyId(familyId);
 
-            var data = _patientRepository.List(patientSpecification);
+//            var data = _patientRepository.List(patientSpecification);
 
-            var result = data.Select(p => (PatientModel)p).ToList();
+//            var result = data.Select(p => (PatientModel)p).ToList();
 
-            return result;
+//            return result;
 
-        }
+//        }
 
-        public int SearchPatientCountAsync(List<GenericSearchParameter> searchParameters)
-        {
-            var patientSpecification = GetPatientSpecification(searchParameters, 0, 0, true);
+//        public int SearchPatientCountAsync(List<GenericSearchParameter> searchParameters)
+//        {
+//            var patientSpecification = GetPatientSpecification(searchParameters, 0, 0, true);
 
-            return _patientRepository.Count(patientSpecification);
-        }
-    }
-}
+//            return _patientRepository.Count(patientSpecification);
+//        }
+//    }
+//}

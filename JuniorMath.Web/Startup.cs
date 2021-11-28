@@ -11,36 +11,36 @@ using JuniorMath.Infrastructure.Data;
 using JuniorMath.Infrastructure.Identity;
 using JuniorMath.ApplicationCore.Interfaces.Repository;
 using JuniorMath.Infrastructure.Data.Repository.Base;
-using JuniorMath.ApplicationCore.Interfaces.Services.Patients;
-using JuniorMath.ApplicationCore.Services.Patients;
+//using JuniorMath.ApplicationCore.Interfaces.Services.Patients;
+//using JuniorMath.ApplicationCore.Services.Patients;
 using JuniorMath.Infrastructure.Services.Email;
-using JuniorMath.Web.Interfaces.Api;
-using JuniorMath.Web.Services.Api;
+//using JuniorMath.Web.Interfaces.Api;
+//using JuniorMath.Web.Services.Api;
 using JuniorMath.ApplicationCore.Domain.User;
 using JuniorMath.ApplicationCore.Interfaces.Services.Users;
 using JuniorMath.ApplicationCore.Services.Users;
-using JuniorMath.ApplicationCore.Services.Items;
-using JuniorMath.ApplicationCore.Interfaces.Services.Items;
+//using JuniorMath.ApplicationCore.Services.Items;
+//using JuniorMath.ApplicationCore.Interfaces.Services.Items;
 using JuniorMath.ApplicationCore.Interfaces.Services.Utiliites;
 using JuniorMath.ApplicationCore.Services.Utiliites;
 using JuniorMath.ApplicationCore.Interfaces.Base;
 using JuniorMath.Infrastructure.Configuration.Sms;
 using JuniorMath.Infrastructure.Services.SMS;
-using JuniorMath.ApplicationCore.Services.Doctors;
-using JuniorMath.ApplicationCore.Interfaces.Services.Doctor;
-using JuniorMath.ApplicationCore.Interfaces.Services.Taxes;
-using JuniorMath.ApplicationCore.Services.Taxes;
-using JuniorMath.ApplicationCore.Interfaces.Services.Invoices;
-using JuniorMath.ApplicationCore.Services.Invoices;
+//using JuniorMath.ApplicationCore.Services.Doctors;
+//using JuniorMath.ApplicationCore.Interfaces.Services.Doctor;
+//using JuniorMath.ApplicationCore.Interfaces.Services.Taxes;
+//using JuniorMath.ApplicationCore.Services.Taxes;
+//using JuniorMath.ApplicationCore.Interfaces.Services.Invoices;
+//using JuniorMath.ApplicationCore.Services.Invoices;
 using JuniorMath.Infrastructure.Configuration.Identity;
 using JuniorMath.Infrastructure.Configuration.Email;
 using JuniorMath.RazorClassLib.Services;
-using JuniorMath.Infrastructure.Services.ThirdParty.PaymentGateway.Helcim;
-using JuniorMath.ApplicationCore.Interfaces.Services.ThirdParty.PaymentGateway.Common;
-using JuniorMath.Infrastructure.Configuration.ThirdParty.PaymentGateway.Stripe;
-using JuniorMath.Infrastructure.Services.ThirdParty.PaymentGateway.Stripe;
-using JuniorMath.ApplicationCore.Interfaces.Services.Payment;
-using JuniorMath.ApplicationCore.Services.Payments;
+//using JuniorMath.Infrastructure.Services.ThirdParty.PaymentGateway.Helcim;
+//using JuniorMath.ApplicationCore.Interfaces.Services.ThirdParty.PaymentGateway.Common;
+//using JuniorMath.Infrastructure.Configuration.ThirdParty.PaymentGateway.Stripe;
+//using JuniorMath.Infrastructure.Services.ThirdParty.PaymentGateway.Stripe;
+//using JuniorMath.ApplicationCore.Interfaces.Services.Payment;
+//using JuniorMath.ApplicationCore.Services.Payments;
 using JuniorMath.Web.Interfaces;
 using JuniorMath.Web.Services;
 using JuniorMath.Infrastructure.Configuration.SiteSettings;
@@ -175,33 +175,33 @@ namespace JuniorMath.Web
             services.Configure<SiteSettingsOptions>(Configuration.GetSection("SiteSettingsOptions"));
             services.Configure<SmtpOptions>(Configuration.GetSection("SmtpOptions"));
             services.Configure<SMSoptions>(Configuration.GetSection("TwilioAccountDetails"));
-            services.Configure<StripeKeys>(Configuration.GetSection("Stripe"));
+           // services.Configure<StripeKeys>(Configuration.GetSection("Stripe"));
             services.Configure<SendGridOptions>(Configuration.GetSection("SendGridOptions"));
         }
 
         private void ConfigureThirdPartyService(IServiceCollection services)
         {
-            services.AddScoped<IThirdPartyPaymentService, HelcimPaymentService>();
-            services.AddScoped<IThirdPartyPaymentService, StripePaymentService>();
+           // services.AddScoped<IThirdPartyPaymentService, HelcimPaymentService>();
+           // services.AddScoped<IThirdPartyPaymentService, StripePaymentService>();
         }
 
         private void ConfigureWebService(IServiceCollection services)
         {
             
-            services.AddScoped<IPatientApiService, PatientApiService>();
+          //  services.AddScoped<IPatientApiService, PatientApiService>();
             services.AddScoped<IRazorViewToStringRenderer, RazorViewToStringRenderer>();
         }
 
         private void ConfigureApplicatiojnService(IServiceCollection services)
         {
             services.AddScoped<IUtilityService, UtilityService>();
-            services.AddScoped<IPatientService, PatientService>();
+           // services.AddScoped<IPatientService, PatientService>();
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IItemService, ItemService>();
-            services.AddScoped<IDoctorService, DoctorService>();
-            services.AddScoped<ITaxService, TaxService>();
-            services.AddScoped<IInvoiceService, InvoiceService>();
-            services.AddScoped<IPaymentService, PaymentService>();
+           // services.AddScoped<IItemService, ItemService>();
+           // services.AddScoped<IDoctorService, DoctorService>();
+           // services.AddScoped<ITaxService, TaxService>();
+           // services.AddScoped<IInvoiceService, InvoiceService>();
+            //services.AddScoped<IPaymentService, PaymentService>();
         }
     }
 }
