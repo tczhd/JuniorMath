@@ -9,7 +9,6 @@ namespace JuniorMath.ApplicationCore.Interfaces.Services.Utiliites
     {
         List<ListItemModel> GetCountries();
         List<ListItemModel> GetRegions();
-        List<ListItemModel> GetServiceGroups();
         List<ListItemModel> GetSiteUserLevel();
     }
 }

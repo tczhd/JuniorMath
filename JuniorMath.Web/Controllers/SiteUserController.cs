@@ -85,7 +85,6 @@ namespace JuniorMath.Web.Controllers
                     var siteUserModel = new SiteUserModel {
                     Email = model.Email,
                     FirstName = model.FirstName,
-                    IsDoctor = model.IsDoctor,
                     LastName = model.LastName,
                     Password =model.Password,
                     SiteUserId = model.SiteUserId,

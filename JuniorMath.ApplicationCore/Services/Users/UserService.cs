@@ -1,7 +1,6 @@
 ﻿using JuniorMath.ApplicationCore.Domain.User;
 using JuniorMath.ApplicationCore.DTOs.Common;
 using JuniorMath.ApplicationCore.DTOs.User;
-using JuniorMath.ApplicationCore.Entities.DoctorAggregate;
 using JuniorMath.ApplicationCore.Entities.UserAggregate;
 using JuniorMath.ApplicationCore.Interfaces.Repository;
 using JuniorMath.ApplicationCore.Interfaces.Services.Users;
@@ -15,13 +14,11 @@ namespace JuniorMath.ApplicationCore.Services.Users
     public class UserService : IUserService
     {
         private readonly IRepository<SiteUser> _siteUserRepository;
-        private readonly IRepository<Doctor> _doctorRepository;
         private readonly UserHandler _userHandler;
 
-        public UserService(IRepository<SiteUser> siteUserRepository, IRepository<Doctor> doctorRepository, UserHandler userHandler)
+        public UserService(IRepository<SiteUser> siteUserRepository,  UserHandler userHandler)
         {
             _siteUserRepository = siteUserRepository;
-            _doctorRepository = doctorRepository;
             _userHandler = userHandler;
         }
 
@@ -36,12 +33,6 @@ namespace JuniorMath.ApplicationCore.Services.Users
 
                 var result = new UserContext
                 {
-                    ClinicId = siteUser.ClinicId,
-                    ClinicName = siteUser.Clinic.Name,
-                    ClinicCountryId = siteUser.Clinic.Address.CountryId,
-                    ClinicRegionId = siteUser.Clinic.Address.RegionId,
-                    DoctorId = siteUser.DoctorId,
-                    DoctorName = siteUser.Doctor != null ? $"{siteUser.Doctor.FirstName} {siteUser.Doctor.LastName}" : string.Empty,
                     SiteUserId = siteUser.Id,
                     SiteUserName = $"{siteUser.FirstName} {siteUser.LastName}",
                     SiteUserLevelId = siteUser.SiteUserLevelId,
@@ -75,24 +66,7 @@ namespace JuniorMath.ApplicationCore.Services.Users
                     UserId = siteUserModel.UserId,
                     SiteUserLevelId = siteUserModel.SiteUserLevelId,
                     Active= true,
-                    ClinicId = userContext.ClinicId
                 };
-
-                if (siteUserModel.IsDoctor) {
-                    siteUser.Doctor = new Doctor()
-                    {
-                        Active = true,
-                        Age = 1,
-                        ClinicId = userContext.ClinicId,
-                        CreatedBy = userContext.SiteUserId,
-                        CreatedDateUtc = DateTime.UtcNow,
-                        Email = siteUserModel.Email,
-                        FirstName = siteUserModel.FirstName,
-                        Gender = 1,
-                        LastName = siteUserModel.LastName,
-                        Title = "Dr."
-                    };
-                }
 
                 _siteUserRepository.Add(siteUser);
 

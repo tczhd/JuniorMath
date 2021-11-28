@@ -16,6 +16,5 @@ namespace JuniorMath.ApplicationCore.DTOs.User
 
         public string LastName { get; set; }
         public string Password { get; set; }
-        public bool IsDoctor { get; set; }
     }
 }

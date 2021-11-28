@@ -12,9 +12,6 @@ namespace JuniorMath.ApplicationCore.Specifications.Users
         public UserContextSpefification() : base()
         {
             AddInclude(b => b.SiteUserLevel);
-            AddInclude(b => b.Clinic);
-            AddInclude(b => b.Clinic.Address);
-            AddInclude(b => b.Doctor);
         }
 
         public void AddUserId(string userId)

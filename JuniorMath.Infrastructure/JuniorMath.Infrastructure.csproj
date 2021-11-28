@@ -11,6 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\DatabaseElements\Triggers\" />
+    <Folder Include="Data\DatabaseElements\Views\" />
     <Folder Include="Services\Redis\" />
   </ItemGroup>
 

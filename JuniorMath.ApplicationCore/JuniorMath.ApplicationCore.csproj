@@ -7,14 +7,13 @@
   <ItemGroup>
     <Compile Remove="Exceptions\**" />
     <Compile Remove="Interfaces\Logging\**" />
+    <Compile Remove="Services\Base\**" />
     <EmbeddedResource Remove="Exceptions\**" />
     <EmbeddedResource Remove="Interfaces\Logging\**" />
+    <EmbeddedResource Remove="Services\Base\**" />
     <None Remove="Exceptions\**" />
     <None Remove="Interfaces\Logging\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\Base\" />
+    <None Remove="Services\Base\**" />
   </ItemGroup>
 
   <ItemGroup>

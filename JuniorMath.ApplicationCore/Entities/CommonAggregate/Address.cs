@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using JuniorMath.ApplicationCore.Entities.PatientAggregate;
 using JuniorMath.ApplicationCore.Entities.SettingsAggregate;
 using JuniorMath.ApplicationCore.Entities.UserAggregate;
 
@@ -12,8 +11,6 @@ namespace JuniorMath.ApplicationCore.Entities.CommonAggregate
     {
         public Address()
         {
-            Patient = new HashSet<Patient>();
-            Clinic = new HashSet<Clinic>();
         }
 
         public int AddressTypeId { get; set; }
@@ -35,7 +32,5 @@ namespace JuniorMath.ApplicationCore.Entities.CommonAggregate
         public virtual SiteUser CreatedByNavigation { get; set; }
         public virtual Region RegionNavigation { get; set; }
         public virtual SiteUser UpdatedByNavigation { get; set; }
-        public virtual ICollection<Patient> Patient { get; set; }
-        public virtual ICollection<Clinic> Clinic { get; set; }
     }
 }
