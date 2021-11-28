@@ -1,0 +1,116 @@
+﻿@using JuniorMath.ApplicationCore.Domain.User
+@using JuniorMath.ApplicationCore.Enums
+@inject UserHandler _userHandler
+
+@{
+    var userContext = _userHandler.GetUserContext();
+}
+
+<!-- *SIDEBAR-NAV* -->
+<nav class="sidebar-nav">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index" asp-route-view="DashBoard">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+                <span class="badge badge-primary">NEW</span>
+            </a>
+        </li>
+        <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" asp-controller="Patient" asp-action="Index" asp-route-view="Index">
+                <i class="fas fa-user-injured"></i> Patients
+            </a>
+            <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Patient" asp-action="Index" asp-route-view="PatientForm">
+                        <i></i>New Patient
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Patient" asp-action="Index" asp-route-view="Index">
+                        <i></i>View Patient
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" asp-controller="Item" asp-action="Index" asp-route-view="Index">
+                <i class="fas fa-briefcase-medical"></i> Services
+            </a>
+            <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Item" asp-action="Index" asp-route-view="ItemForm">
+                        <i></i>New Service
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Item" asp-action="Index" asp-route-view="Index">
+                        <i></i>View Services
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" asp-controller="Invoice" asp-action="Index" asp-route-view="Index">
+                <i class="fas fa-file-invoice-dollar"></i> Invoices
+            </a>
+            <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Invoice" asp-action="Index" asp-route-view="Index">
+                        <i></i>View Invoice
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+        <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" asp-controller="SiteUser" asp-action="Index" asp-route-view="Index">
+                <i class="fas fa-angle-left"></i> User Settings
+            </a>
+            <ul class="nav-dropdown-items">
+                @if (userContext.SiteUserLevelId == (int)SiteUserLevelType.AdminUser)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="SiteUser" asp-action="Index" asp-route-view="SiteUserForm">
+                            <i></i>New User
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="SiteUser" asp-action="Index" asp-route-view="Index">
+                            <i></i>View Users
+                        </a>
+                    </li>
+                }
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Clinic" asp-action="Index" asp-route-view="Index">
+                        <i></i>Clinic Info
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                        <i></i>Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                        <i></i>Two Factor
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new {area = ""})" method="post" id="logoutForm">
+                        <script>
+                            function logout() {
+                                $('#logoutForm').submit();
+                            }
+                        </script>
+                        <a class="dropdown-item" href="javascript: void(0)" onclick="logout()">
+                            <i></i>Logout
+                        </a>
+                    </form>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+<!-- /*SIDEBAR-NAV* -->

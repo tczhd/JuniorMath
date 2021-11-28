@@ -1,0 +1,118 @@
+﻿/*body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}*/
+
+.app-header.navbar .navbar-brand {
+    width:200px;
+    background-color:#87CDFF;
+}
+
+.app-body .sidebar {
+    background-color: #D4EDFF;
+}
+
+    .app-body .sidebar .nav .nav-item a.nav-link {
+        font-family: Arimo;
+        font-size: 16px;
+        color:#454F5B;
+    }
+
+/*.sidebar .nav-link.active,
+.sidebar .navbar .active.dropdown-toggle,
+.navbar .sidebar .active.dropdown-toggle {
+    background-color: #87B4DE;
+}*/
+
+
+
+h2 {
+    margin-top: 10px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+
+    )
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .input-group-addon {
+        width: 100%;
+        box-sizing: content-box;
+        white-space: pre-line;
+    }
+}
+
+.nav-pills .nav-link.active > a {
+    color: whitesmoke !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.cursor-croshair {
+    cursor: crosshair;
+}
+
+.cursor-eresize {
+    cursor: e-resize;
+}
+
+.cursor-move {
+    cursor: move;
+}
+
+#SearchTypeSelect {
+    height: 42px;
+    /*box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 0px 1px 0 rgba(0,0,0,.16);*/
+}
+
+/*Floating label*/
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-control-placeholder {
+    position: absolute;
+    top: 0;
+    padding: 7px 0 0 13px;
+    transition: all 200ms;
+    opacity: 0.5;
+}
+
+.form-control:focus + .form-control-placeholder,
+.form-control:valid + .form-control-placeholder {
+    font-size: 75%;
+    transform: translate3d(0, -100%, 0);
+    opacity: 1;
+}

@@ -1,0 +1,200 @@
+﻿.tutorialBody {
+    font: 18px/normal 'Segoe UI',Arial,Helvetica,Sans-Serif;
+    color: #292f33;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+@media (max-width: 480px) {
+    #head-search-box-ul {
+        margin-top:13px;
+    }
+
+    .sidebar {
+        margin-top:82px;
+    }
+}
+
+.example {
+    padding: 30px 0;
+    text-align: center;
+}
+
+.exampleTitle {
+    font: 32px/normal 'Segoe UI Light',Arial,Helvetica,Sans-Serif;
+    margin: 20px 0;
+    font-size: 32px;
+    text-align: center;
+}
+
+.exampleText {
+    text-align: left;
+}
+
+.searchBoxForm {
+    width: 400px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 4px 0 rgba(0,0,0,.16);
+    background-color: #fff;
+    display: inline-block;
+    border-collapse: collapse;
+    border-spacing: 0;
+    list-style: none;
+    color: #666;
+    margin-right: 10px;
+    height:40px;
+    vertical-align:middle;
+    padding-top:3px;
+}
+
+.searchBox {
+    width: 80%;
+    font-size: 16px;
+    margin: 0px 0 1px 20px;
+    padding: 0 10px 0 0;
+    border: 0;
+    max-height: 30px;
+    outline: none;
+    box-sizing: content-box;
+    height: 35px;
+    vertical-align: top;
+}
+
+.searchBoxSubmit {
+    background-color: #fff;
+    border-color: #fff;
+    background-image: url(/images/search.png);
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 20px;
+    text-indent: -99em;
+    border-width: 0;
+    border-style: solid;
+    margin: 10px;
+    outline: 0;
+}
+
+
+/*ul class: ui-menu ui-widget ui-widget-content ui-autocomplete ui-front*/
+
+ul.ui-autocomplete {
+    /*color: red !important;
+    -moz-border-radius: 15px;*/
+    /*border-radius: 5px;*/
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-state-active.ui-button:hover {
+    border: 1px solid #919EAB;
+    background: #919EAB;
+}
+
+ul.ui-widget-content li.main-search-menu-item {
+    padding: 3px 5px;
+    width:100%;
+}
+
+ul.ui-widget-content span.main-search-bold-color {
+    font-weight: 600;
+    color: orange
+}
+
+ul.ui-widget-content table.main-search {
+    width:100%;
+    max-width:415px;
+}
+
+    ul.ui-widget-content table.main-search span.patient-detail-hidden {
+       display:none;
+    }
+
+    ul.ui-widget-content table.main-search td span.patient-detail {
+        font-size:14px;
+    }
+
+    ul.ui-widget-content table.main-search td.patient-second-detail {
+        font-size: 12px;
+    }
+
+ul.ui-widget-content li.ui-menu-item {
+    padding-left: 15px;
+    padding-right: 15px;
+    border-bottom: 1px solid #DFE3E8;
+}
+
+
+    ul.ui-widget-content table.main-search button.subscription-date,
+    ul.ui-widget-content table.main-search button.create-invoice {
+        font-size: 12px;
+        border-radius: 5px;
+        padding: 5px 10px;
+        color: #F9FAFB;
+    }
+
+    ul.ui-widget-content table.main-search button.subscription-date {
+        background-color: limegreen;
+        border-color: limegreen;
+    }
+
+    ul.ui-widget-content table.main-search button.create-invoice {
+        background-color: #212B36;
+        border-color: #212B36;
+    }
+
+
+    ul.ui-widget-content table.main-search td.subscription-date,
+    ul.ui-widget-content table.main-search td.create-invoice {
+        width: 15%;
+    }
+
+
+ul.ui-autocomplete.ui-menu {
+    max-width: 450px;
+    max-height: 285px;
+    overflow-y: scroll;
+    z-index: 3000;
+    font: 18px/normal 'Segoe UI',Arial,Helvetica,Sans-Serif;
+}
+
+.ui-menu {
+    /*position: relative;*/
+    /*width: 648px;*/
+}
+
+.ui-autocomplete-category {
+    font: 24px/normal 'Segoe UI Light',Arial,Helvetica,Sans-Serif;
+}
+
+/* for autocompleteInline plugin */
+.hide-autocomplete-dropdown .xdsoft_autocomplete_dropdown {
+    /*display: none !important;*/
+}
+
+.xdsoft_autocomplete_dropdown {
+    margin-left: -18px !important;
+    margin-top: 5px !important;
+    width: 500px !important;
+}
+
+    .xdsoft_autocomplete_dropdown > div {
+        padding-left: 5px !important;
+    }
+
+.xdsoft_autocomplete input {
+    margin: 3px 5px !important;
+}
+
+.xdsoft_autocomplete .xdsoft_autocomplete_hint {
+    position: absolute;
+    z-index: 1;
+    color: #ccc !important;
+    -webkit-text-fill-color: #ccc !important;
+    text-fill-color: #ccc !important;
+    overflow: hidden !important;
+    white-space: pre !important;
+    width: 300px !important;
+}
+
+.xdsoft_autocomplete_dropdown li,
+.xdsoft_autocomplete_dropdown li a
+{
+    width:100%;
+}

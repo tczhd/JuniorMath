@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Xml\**" />
+    <EmbeddedResource Remove="Xml\**" />
+    <None Remove="Xml\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JuniorMath.ApplicationCore\JuniorMath.ApplicationCore.csproj" />
+  </ItemGroup>
+
+</Project>

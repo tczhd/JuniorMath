@@ -1,0 +1,120 @@
+﻿@model JuniorMath.Web.ViewModels.SiteUsers.SiteUserViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="animated fadeIn site-user-form">
+    <form asp-controller="SiteUser" method="post" class="form-horizontal" id="myForm" asp-action="RegisterUser" autocomplete="false">
+        <div class="row site-user  justify-content-center">
+            <div class="col-lg-8 col-md-10 col-sm-12 patient">
+                <div class="card">
+                    <section class="site-user-section">
+                        <div class="card-header">
+                            <strong>@ViewData["FormType"]</strong>
+                            <input type="hidden" asp-for="SiteUserId" id="PatientIdHidden" value="0" />
+                        </div>
+                        <div class="card-body patient-body">
+
+                            <section class="patient-basic-section">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="has-float-label">
+                                                <input asp-for="Email" class="form-control" placeholder="Email address"
+                                                       readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly');
+                                                        // fix for mobile safari to show virtual keyboard
+                                                        this.blur(); this.focus();
+                                                         }" />
+                                                <label for="Email">Email address</label>
+                                            </div>
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="has-float-label">
+                                                <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+                                                <label for="FirstName">First Name</label>
+                                            </div>
+                                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="has-float-label">
+                                                <input asp-for="LastName" class="form-control" placeholder="Last Name" />
+                                                <label for="LastName">Last Name</label>
+                                            </div>
+                                            <span asp-validation-for="LastName" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group  has-float-label">
+                                            <select asp-for="SiteUserLevelId" id="SiteUserLevelIdSelect" name="SiteUserLevelId"
+                                                    class="form-control"
+                                                    asp-items="@(new SelectList(@ViewBag.ListofSiteUserLevels ,"Id", "Name"))"></select>
+                                            <label for="SiteUserLevelIdSelect">User Level</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="switch switch-text switch-pill switch-primary">
+                                                <input type="checkbox" class="switch-input" asp-for="IsDoctor" name="IsDoctor">
+                                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                                <span class="switch-handle"></span>
+                                            </label>
+                                            Is Doctor
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="has-float-label">
+                                                <input asp-for="Password" class="form-control" placeholder="Password" readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly');
+                                                        // fix for mobile safari to show virtual keyboard
+                                                        this.blur(); this.focus();
+                                                         }" />
+                                                <label for="Password">Password</label>
+                                            </div>
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="has-float-label">
+                                                <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
+                                                <label for="ConfirmPassword">Confirm Password</label>
+                                            </div>
+                                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                            </section>
+
+                        </div>
+                    </section>
+
+                    <div class="card-footer add-patient-buttons">
+                        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+
+                        <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>Reset</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+</div>
+
+@section Styles {
+    <link href="~/css/SiteUser/siteuser.css" rel="stylesheet">
+}

@@ -1,0 +1,359 @@
+﻿@model JuniorMath.Web.ViewModels.Invoices.InvoiceViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="animated fadeIn">
+    <form method="post" class="form-horizontal" id="myForm">
+        <div id="invoice" class="row invoice-row">
+            <div class="col-sm-12 invoice-col">
+                <div class="card">
+                    <section class="primary-invoice-section invoice">
+                        <div class="card-header">
+                            <strong>@ViewData["Title"]</strong>
+                            <input type="hidden" asp-for="InvoiceId" id="InvoiceIdHidden" />
+                            <input type="hidden" asp-for="FamilyId" id="FamilyIdHidden" />
+                            <input type="hidden" asp-for="PatientId" id="PatientIdHidden" />
+                        </div>
+                        <div class="card-body invoice-body">
+
+                            <section class="invoice-basic-section">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="form-group invoice-lable">
+                                            <label asp-for="PatientName"></label>:
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            @Html.DisplayFor(item => item.PatientName)
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group invoice-lable">
+                                            <label asp-for="InvoiceId"></label>:
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            @Html.DisplayFor(item => item.DisplayId)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="form-group invoice-lable">
+                                            <label asp-for="SendToName"></label>:
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <div class="send-to-name float-sm-left">
+                                                @Html.DisplayFor(item => item.PatientName)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group invoice-lable">
+                                            <label asp-for="InvoiceDate"></label>:
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group invoice-date">
+                                            @Html.DisplayFor(item => item.InvoiceDate)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="form-group invoice-lable">
+                                            <label asp-for="Address"></label>:
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group address-sestion">
+
+                                            <div class="patient-address">
+                                                <input type="hidden" asp-for="PatientId" id="AddressPatientIdHidden" />
+                                                <div>
+                                                    @Html.DisplayFor(modelItem => modelItem.PatientAddress.Address1) - @Html.DisplayFor(modelItem => modelItem.PatientAddress.Address2)
+                                                    @Html.DisplayFor(modelItem => modelItem.PatientAddress.City),
+                                                    @Html.DisplayFor(modelItem => modelItem.PatientAddress.RegionName) &nbsp;
+                                                    @Html.DisplayFor(modelItem => modelItem.PatientAddress.CountryName)
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group invoice-lable">
+                                            <label asp-for="DoctorName"></label>:
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            @Html.DisplayFor(item => item.DoctorName)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="form-group invoice-lable">
+                                            <label asp-for="ReOccouring "></label>:
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="switch switch-text switch-pill switch-primary">
+                                                <input type="checkbox" class="switch-input">
+                                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                                <span class="switch-handle"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <div class="form-group re-occouring-type d-none">
+                                            <select id="selectReOccouringType" name="selectReOccouringType" class="form-control">
+                                                <option value="1">Yearly</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group re-occouring-year d-none">
+                                            <select id="selectYear" name="selectYear" class="form-control">
+                                                <option value="1">Starting January 9, 2019</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </section>
+                        </div>
+                    </section>
+
+                    <section class="invoice-detail-section">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="table-responsive-md text-nowrap">
+                                            <table class="table table-bordered table-striped table-sm table-invoices">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width:20%">Service</th>
+                                                        <th style="width:40%">Description</th>
+                                                        <th style="width:10%">Qty</th>
+                                                        <th style="width:10%">Cost</th>
+                                                        <th style="width:10%">Tax</th>
+                                                        <th style="width:10%">Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="invoice-items">
+
+                                                    @foreach (var item in Model.InvoiceItems)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @item.ItemName
+                                                            </td>
+                                                            <td>
+                                                                @item.Description
+                                                            </td>
+                                                            <td>
+                                                                @item.Quantity
+                                                            </td>
+                                                            <td>
+                                                                @item.Cost.ToString("0.00")
+                                                            </td>
+                                                            <td>
+                                                                @item.Tax.ToString("0.00")
+                                                            </td>
+                                                            <td>
+                                                                @item.SubTotal.ToString("0.00")
+                                                            </td>
+                                                        </tr>
+
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/.col-->
+                        </div>
+                    </section>
+
+                    <section class="invoice-total">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-8 ">
+                                        <div class="paid-in-full @(@Model.BalanceDue == 0 ? "" : "d-none")">
+                                            <img src="~/img/paidInFull.jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 invoice-total">
+                                        <table class="table table-bordered table-sm table-invoices">
+                                            <tbody class="invoice-total">
+                                                <tr><td class="invoice-total-lable">Subtotal:</td><td class="invoice-subtotal">@Model.SubTotal.ToString("0.00")</td></tr>
+                                                <tr><td class="invoice-total-lable">Tax:</td><td class="invoice-tax">@Model.Tax.ToString("0.00")</td></tr>
+                                                <tr><td class="invoice-total-lable">Total:</td><td class="invoice-total">@Model.Total.ToString("0.00")</td></tr>
+                                                <tr><td class="invoice-total-lable">Amount paid:</td><td class="invoice-amount-paid">@Model.AmountPaid.ToString("0.00")</td></tr>
+                                                <tr><td class="invoice-total-lable">Balance Due:</td><td class="invoice-balance">@Model.BalanceDue.ToString("0.00")</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="card-footer add-patient-buttons">
+                        <button type="submit" class="btn btn-sm btn-primary edit-invoice">Edit</button>
+                        <button type="button" class="btn btn-sm btn-primary send-email" onclick="JuniorMath.InvoiceDetail.SendInvoiceEmailModal()">Send Email</button>
+                        @{ if (@Model.BalanceDue > 0)
+                            {
+                                <button type="button" class="btn btn-sm btn-primary apply-payment" onclick="JuniorMath.InvoiceDetail.ShowPaymentModal()">Apply Payment</button>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+</div>
+
+<div id="credit-card-form" style="display:none;">
+
+    <div class="row credit-card-row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+
+                    <label class="radio-inline" for="inline-radio-credit-card">
+                        <input type="radio" id="inline-radio-credit-card" name="inline-radios" value="3" checked="checked"> Credit Card
+                    </label>
+                    <label class="radio-inline" for="inline-radio-check" hidden>
+                        <input type="radio" id="inline-radio-check" name="inline-radios" value="2"> Check
+                    </label>
+                    <label class="radio-inline" for="inline-radio-cash" hidden>
+                        <input type="radio" id="inline-radio-cash" name="inline-radios" value="1"> Cash
+                    </label>
+                </div>
+                <div class="card-body">
+                    <section class="basic-info">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Payment Amount</label>
+                                    <input id="PaymentAmount" type="text" class="form-control payment-amount" placeholder="Enter your payment amount">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="check-info" style="display:none">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Check No.</label>
+                                    <input type="text" class="form-control check-no" " placeholder="Enter your check No.">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="credit-card-info">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Card Holder Name</label>
+                                    <input type="text" class="form-control card-holder-name" placeholder="Enter card holder name">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="ccnumber">Credit Card Number</label>
+                                    <input type="text" class="form-control credit-card-number" placeholder="0000 0000 0000 0000">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <div class="row">
+                            <div class="form-group col-sm-4">
+                                <label for="ccmonth">Month</label>
+                                <select class="form-control credit-card-month">
+                                    <option>01</option>
+                                    <option>02</option>
+                                    <option>03</option>
+                                    <option>04</option>
+                                    <option>05</option>
+                                    <option>06</option>
+                                    <option>07</option>
+                                    <option>08</option>
+                                    <option>09</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label for="ccyear">Year</label>
+                                <select class="form-control credit-card-year">
+                                    <option>2019</option>
+                                    <option>2020</option>
+                                    <option>2021</option>
+                                    <option>2022</option>
+                                    <option>2023</option>
+                                    <option>2024</option>
+                                    <option>2025</option>
+                                    <option>2026</option>
+                                    <option>2027</option>
+                                    <option>2028</option>
+                                    <option>2029</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="cvv">CVV/CVC</label>
+                                    <input type="text" class="form-control credit-card-cvv" placeholder="cvv code">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Zip</label>
+                                    <input type="text" class="form-control credit-card-zip" placeholder="Enter your Zip">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="ccnumber">Address (option)</label>
+                                    <input type="text" class="form-control credit-card-adress" placeholder="Enter your address">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link href="/css/Invoice/InvoiceDetail.css" rel="stylesheet">
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="/js/views/Invoices/invoiceDetail.js"></script>
+}

@@ -1,0 +1,18 @@
+﻿.search-filter {
+    padding: 5px;
+    background-color: gray;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+@media screen and (min-width: 600px) {
+    div.view-patients-search-section div.select-type {
+        padding-right: 0px
+    }
+
+    div.view-patients-search-section div.filter-input {
+        padding-left: 0px;
+        padding-right: 0px
+    }
+}
+
