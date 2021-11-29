@@ -1,5 +1,7 @@
 ﻿using JuniorMath.ApplicationCore.Entities.CommonAggregate;
+using JuniorMath.ApplicationCore.Entities.ExaminationPaperAggregate;
 using JuniorMath.ApplicationCore.Entities.QuestionAggregate;
+using JuniorMath.ApplicationCore.Entities.StudentAggregate;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -12,6 +14,8 @@ namespace JuniorMath.ApplicationCore.Entities.UserAggregate
             AddressCreatedByNavigation = new HashSet<Address>();
             AddressUpdatedByNavigation = new HashSet<Address>();
             QuestionCreatedByNavigation = new HashSet<Question>();
+            ExaminationPaperCreatedByNavigation = new HashSet<ExaminationPaper>();
+            StudentExaminationPaperCreatedByNavigation = new HashSet<StudentExaminationPaper>();
         }
 
         public string FirstName { get; set; }
@@ -28,5 +32,8 @@ namespace JuniorMath.ApplicationCore.Entities.UserAggregate
         public virtual ICollection<Address> AddressCreatedByNavigation { get; set; }
         public virtual ICollection<Address> AddressUpdatedByNavigation { get; set; }
         public virtual ICollection<Question> QuestionCreatedByNavigation { get; set; }
+        public virtual ICollection<StudentExaminationPaperQuestionAnswer> StudentSiteUserIdNavigation { get; set; }
+        public virtual ICollection<ExaminationPaper> ExaminationPaperCreatedByNavigation { get; set; }
+        public virtual ICollection<StudentExaminationPaper> StudentExaminationPaperCreatedByNavigation { get; set; }
     }
 }

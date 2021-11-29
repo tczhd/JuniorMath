@@ -31,7 +31,7 @@ namespace JuniorMath.ApplicationCore.Interfaces.Base
         //}
         //public AutocompleteResult AutoComplete(IndexNameType indexNameType, string term);
 
-        IList<SuggestResult<Document>> Suggest(IndexNameType indexNameType, bool highlights, bool fuzzy, string searchText);
+      //  IList<SuggestResult<Document>> Suggest(IndexNameType indexNameType, bool highlights, bool fuzzy, string searchText);
 
         //public Document LookUp(IndexNameType indexNameType, string id);
     }

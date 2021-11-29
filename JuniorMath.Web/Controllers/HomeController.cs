@@ -41,10 +41,10 @@ namespace JuniorMath.Web.Controllers
 
         }
 
-        private JobsSearch GetJobsSearch()
-        {
-            return new JobsSearch(_siteSettingsOptions);
-        }
+        //private JobsSearch GetJobsSearch()
+        //{
+        //    return new JobsSearch(_siteSettingsOptions);
+        //}
 
         [Route("{view=Index}")]
         public IActionResult Index(string view)
@@ -86,46 +86,46 @@ namespace JuniorMath.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public ActionResult Suggest(string searchFrom, string searchType, bool highlights, bool fuzzy, string term)
-        {
-            var _jobsSearch = GetJobsSearch();
+        //public ActionResult Suggest(string searchFrom, string searchType, bool highlights, bool fuzzy, string term)
+        //{
+        //    var _jobsSearch = GetJobsSearch();
 
-            var userContext = GetUserContext();
-           // userContext.ClinicId
-            //InitSearch();
+        //    var userContext = GetUserContext();
+        //   // userContext.ClinicId
+        //    //InitSearch();
 
-            //// Call suggest API and return results
-            //SuggestParameters sp = new SuggestParameters()
-            //{
-            //    UseFuzzyMatching = fuzzy,
-            //    Top = 5
-            //};
+        //    //// Call suggest API and return results
+        //    //SuggestParameters sp = new SuggestParameters()
+        //    //{
+        //    //    UseFuzzyMatching = fuzzy,
+        //    //    Top = 5
+        //    //};
 
-            //if (highlights)
-            //{
-            //    sp.HighlightPreTag = "<b>";
-            //    sp.HighlightPostTag = "</b>";
-            //}
+        //    //if (highlights)
+        //    //{
+        //    //    sp.HighlightPreTag = "<b>";
+        //    //    sp.HighlightPostTag = "</b>";
+        //    //}
 
-            //var suggestResult = _indexClient.Documents.Suggest(term, "sg", sp);
-            var suggestResult = _jobsSearch.Suggest(GetIndexNameType(searchType), highlights, fuzzy, term);
-            // Convert the suggest query results to a list that can be displayed in the client.
-            //var suggestions = suggestResult.Results.Select(x => x.Text).ToList();
-            var suggestions = suggestResult.Results.Where(p => p.Document["ClinicId"].ToString() == userContext.ClinicId.ToString()).Select(x => new
-            {
-                //label = $"{x.Document["FirstName"]},{x.Document["LastName"]},{x.Document["Phone"]}"
-                label = searchFrom == "main" ? GetSearchLabelTable(x.Document, term) : $"{ x.Document["FirstName"]}, {x.Document["LastName"]}, {x.Document["Phone"]}",
-                value = $"{x.Document["Id"]}-{x.Document["DoctorId"]}"
+        //    //var suggestResult = _indexClient.Documents.Suggest(term, "sg", sp);
+        //   // var suggestResult = _jobsSearch.Suggest(GetIndexNameType(searchType), highlights, fuzzy, term);
+        //    // Convert the suggest query results to a list that can be displayed in the client.
+        //    //var suggestions = suggestResult.Results.Select(x => x.Text).ToList();
+        //    var suggestions = suggestResult.Results.Where(p => p.Document["ClinicId"].ToString() == userContext.ClinicId.ToString()).Select(x => new
+        //    {
+        //        //label = $"{x.Document["FirstName"]},{x.Document["LastName"]},{x.Document["Phone"]}"
+        //        label = searchFrom == "main" ? GetSearchLabelTable(x.Document, term) : $"{ x.Document["FirstName"]}, {x.Document["LastName"]}, {x.Document["Phone"]}",
+        //        value = $"{x.Document["Id"]}-{x.Document["DoctorId"]}"
                 
-            }).ToList();
-            //var data = suggestions.Select(p => new { label = p, value = "1" });
-            return new JsonResult(suggestions);
-            //return new JsonResult(new
-            //{
-            //    JsonRequestBehavior = 0,
-            //    Data = suggestions
-            //});
-        }
+        //    }).ToList();
+        //    //var data = suggestions.Select(p => new { label = p, value = "1" });
+        //    return new JsonResult(suggestions);
+        //    //return new JsonResult(new
+        //    //{
+        //    //    JsonRequestBehavior = 0,
+        //    //    Data = suggestions
+        //    //});
+        //}
 
         private string GetSearchLabelTable(Document document, string term)
         {
@@ -195,59 +195,59 @@ namespace JuniorMath.Web.Controllers
         }
 
 
-        public ActionResult Search(string searchType, string q = "", int currentPage = 0)
-        {
-            var _jobsSearch = GetJobsSearch();
-            string businessTitleFacet = "";
-            string postingTypeFacet = "";
-            string salaryRangeFacet = "";
-            string sortType = "";
-            double lat = 40.736224;
-            double lon = -73.99251;
-            int zipCode = 10001;
-            int maxDistance = 0;
-            // If blank search, assume they want to search everything
-            if (string.IsNullOrWhiteSpace(q))
-                q = "*";
+        //public ActionResult Search(string searchType, string q = "", int currentPage = 0)
+        //{
+        //    var _jobsSearch = GetJobsSearch();
+        //    string businessTitleFacet = "";
+        //    string postingTypeFacet = "";
+        //    string salaryRangeFacet = "";
+        //    string sortType = "";
+        //    double lat = 40.736224;
+        //    double lon = -73.99251;
+        //    int zipCode = 10001;
+        //    int maxDistance = 0;
+        //    // If blank search, assume they want to search everything
+        //    if (string.IsNullOrWhiteSpace(q))
+        //        q = "*";
 
-            string maxDistanceLat = string.Empty;
-            string maxDistanceLon = string.Empty;
+        //    string maxDistanceLat = string.Empty;
+        //    string maxDistanceLon = string.Empty;
 
-            var response = _jobsSearch.Search(GetIndexNameType(searchType), q, businessTitleFacet, postingTypeFacet, salaryRangeFacet, sortType, lat, lon, currentPage, maxDistance, maxDistanceLat, maxDistanceLon);
-            return new JsonResult
-            (
-                new { results = response.Results, facets = response.Facets, count = (int)response.Count }
-           );
-        }
+        //    var response = _jobsSearch.Search(GetIndexNameType(searchType), q, businessTitleFacet, postingTypeFacet, salaryRangeFacet, sortType, lat, lon, currentPage, maxDistance, maxDistanceLat, maxDistanceLon);
+        //    return new JsonResult
+        //    (
+        //        new { results = response.Results, facets = response.Facets, count = (int)response.Count }
+        //   );
+        //}
 
-        public ActionResult AutoComplete(string searchType, string term)
-        {
-            var _jobsSearch = GetJobsSearch();
-            //InitSearch();
-            ////Call autocomplete API and return results
-            //AutocompleteParameters ap = new AutocompleteParameters()
-            //{
-            //    AutocompleteMode = AutocompleteMode.OneTermWithContext,
-            //    UseFuzzyMatching = false,
-            //    Top = 5
-            //};
-            //AutocompleteResult autocompleteResult = _indexClient.Documents.Autocomplete(term, "sg", ap);
-            AutocompleteResult autocompleteResult = _jobsSearch.AutoComplete(GetIndexNameType(searchType), term);
-            // Conver the Suggest results to a list that can be displayed in the client.
-            List<string> autocomplete = autocompleteResult.Results.Select(x => x.Text).ToList();
-            return new JsonResult(autocomplete);
-            //return new JsonResult(new
-            //{
-            //    JsonRequestBehavior = 0,
-            //    Data = autocomplete
-            //});
-        }
+        //public ActionResult AutoComplete(string searchType, string term)
+        //{
+        //    var _jobsSearch = GetJobsSearch();
+        //    //InitSearch();
+        //    ////Call autocomplete API and return results
+        //    //AutocompleteParameters ap = new AutocompleteParameters()
+        //    //{
+        //    //    AutocompleteMode = AutocompleteMode.OneTermWithContext,
+        //    //    UseFuzzyMatching = false,
+        //    //    Top = 5
+        //    //};
+        //    //AutocompleteResult autocompleteResult = _indexClient.Documents.Autocomplete(term, "sg", ap);
+        //    AutocompleteResult autocompleteResult = _jobsSearch.AutoComplete(GetIndexNameType(searchType), term);
+        //    // Conver the Suggest results to a list that can be displayed in the client.
+        //    List<string> autocomplete = autocompleteResult.Results.Select(x => x.Text).ToList();
+        //    return new JsonResult(autocomplete);
+        //    //return new JsonResult(new
+        //    //{
+        //    //    JsonRequestBehavior = 0,
+        //    //    Data = autocomplete
+        //    //});
+        //}
 
-        private IndexNameType GetIndexNameType(string searchType)
-        {
-            int typeId = int.Parse(searchType);
-            return (IndexNameType)typeId;
-        }
+        //private IndexNameType GetIndexNameType(string searchType)
+        //{
+        //    int typeId = int.Parse(searchType);
+        //    return (IndexNameType)typeId;
+        //}
         //public ActionResult Facets()
         //{
         //    InitSearch();

@@ -21,11 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuniorMath.Api", "JuniorMat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuniorMath.Web", "JuniorMath.Web\JuniorMath.Web.csproj", "{C12A6EC0-7975-4AF6-A037-794B0075B331}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMLYS.FunctionalTests", "JuniorMath.FunctionalTests\SMLYS.FunctionalTests.csproj", "{BCF34D74-9CD4-435C-A08C-CEB3CF3F93A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuniorMath.FunctionalTests", "JuniorMath.FunctionalTests\JuniorMath.FunctionalTests.csproj", "{BCF34D74-9CD4-435C-A08C-CEB3CF3F93A6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMLYS.IntegrationTests", "JuniorMath.IntegrationTests\SMLYS.IntegrationTests.csproj", "{DFD0576A-1AEC-4587-9D23-AB3C6F523EE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuniorMath.IntegrationTests", "JuniorMath.IntegrationTests\JuniorMath.IntegrationTests.csproj", "{DFD0576A-1AEC-4587-9D23-AB3C6F523EE5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMLYS.UnitTests", "JuniorMath.UnitTests\SMLYS.UnitTests.csproj", "{BDC6C66C-0102-4826-95CB-7D584B4BA290}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuniorMath.UnitTests", "JuniorMath.UnitTests\JuniorMath.UnitTests.csproj", "{BDC6C66C-0102-4826-95CB-7D584B4BA290}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuniorMath.Backend", "JuniorMath.Backend\JuniorMath.Backend.csproj", "{1ABF4958-A9F6-4161-9160-9CF7D26190A3}"
 EndProject
