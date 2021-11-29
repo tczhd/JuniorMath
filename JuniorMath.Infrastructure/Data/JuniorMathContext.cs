@@ -3,7 +3,7 @@ using JuniorMath.ApplicationCore.Entities;
 using JuniorMath.ApplicationCore.Entities.CommonAggregate;
 using JuniorMath.ApplicationCore.Entities.SettingsAggregate;
 using JuniorMath.ApplicationCore.Entities.UserAggregate;
-
+using JuniorMath.ApplicationCore.Entities.QuestionAggregate;
 
 namespace JuniorMath.Infrastructure.Data
 {
@@ -26,6 +26,7 @@ namespace JuniorMath.Infrastructure.Data
         public virtual DbSet<SiteUser> SiteUser { get; set; }
         public virtual DbSet<SiteUserLevel> SiteUserLevel { get; set; }
         public virtual DbSet<Class> Class { get; set; }
+        public virtual DbSet<QuestionImageSetting> QuestionImageSetting { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 //            if (!optionsBuilder.IsConfigured)
@@ -172,6 +173,36 @@ namespace JuniorMath.Infrastructure.Data
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<QuestionImageSetting>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.ImageName)
+                .IsRequired()
+                .HasMaxLength(100);
+
+                entity.HasIndex(m => new { m.ImageName }).IsUnique();
+            });
+
+            modelBuilder.Entity<Question>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(200);
+
+                entity.Property(e => e.ImageOrders)
+                .IsRequired()
+                .HasMaxLength(1000);
+
+                entity.Property(e => e.Answers)
+                .IsRequired()
+                .HasMaxLength(1000);
+
+                entity.HasIndex(m => new { m.Name }).IsUnique();
             });
         }
     }

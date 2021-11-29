@@ -1,5 +1,5 @@
 ﻿using JuniorMath.ApplicationCore.Entities.CommonAggregate;
-
+using JuniorMath.ApplicationCore.Entities.QuestionAggregate;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -11,6 +11,7 @@ namespace JuniorMath.ApplicationCore.Entities.UserAggregate
         {
             AddressCreatedByNavigation = new HashSet<Address>();
             AddressUpdatedByNavigation = new HashSet<Address>();
+            QuestionCreatedByNavigation = new HashSet<Question>();
         }
 
         public string FirstName { get; set; }
@@ -26,5 +27,6 @@ namespace JuniorMath.ApplicationCore.Entities.UserAggregate
         public virtual SiteUserLevel SiteUserLevel { get; set; }
         public virtual ICollection<Address> AddressCreatedByNavigation { get; set; }
         public virtual ICollection<Address> AddressUpdatedByNavigation { get; set; }
+        public virtual ICollection<Question> QuestionCreatedByNavigation { get; set; }
     }
 }
