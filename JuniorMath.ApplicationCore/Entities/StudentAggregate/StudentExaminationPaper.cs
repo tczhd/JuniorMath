@@ -13,7 +13,7 @@ namespace JuniorMath.ApplicationCore.Entities.StudentAggregate
         }
         public int StudentSiteUserId { get; set; }
         public int ExaminationPaperId { get; set; }
-        public string Description { get; set; }
+        public string Notes { get; set; }
         public int? TotalMarks { get; set; }
         public bool Submitted { get; set; }
         public DateTime? SubmittedDate { get; set; }

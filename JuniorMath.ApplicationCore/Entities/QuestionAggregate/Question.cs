@@ -16,7 +16,7 @@ namespace JuniorMath.ApplicationCore.Entities.QuestionAggregate
         public int QuestionType { get; set; }
         public string Description { get; set; }
         public string ImageOrders { get; set; }
-        public string Answers { get; set; }
+        public string CorrectAnswers { get; set; }
         public int Marks { get; set; }
         public DateTime CreatedDate { get; set; }
         public int CreatedBy { get; set; }

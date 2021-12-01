@@ -198,7 +198,7 @@ namespace JuniorMath.Infrastructure.Data
                 .IsRequired()
                 .HasMaxLength(1000);
 
-                entity.Property(e => e.Answers)
+                entity.Property(e => e.CorrectAnswers)
                 .IsRequired()
                 .HasMaxLength(1000);
 

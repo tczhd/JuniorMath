@@ -20,4 +20,9 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\Services\Question\" />
+    <Folder Include="Services\Question\" />
+  </ItemGroup>
+
 </Project>
