@@ -1,4 +1,5 @@
-﻿using JuniorMath.ApplicationCore.Entities.StudentAggregate;
+﻿using JuniorMath.ApplicationCore.Entities.ExaminationPaperAggregate;
+using JuniorMath.ApplicationCore.Entities.StudentAggregate;
 using JuniorMath.ApplicationCore.Entities.UserAggregate;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,8 @@ namespace JuniorMath.ApplicationCore.Entities.QuestionAggregate
     {
         public Question()
         {
-            QuestionIdNavigation = new HashSet<StudentExaminationPaperQuestionAnswer>();
+            PaperQuestionAnswerQuestionIdNavigation = new HashSet<StudentExaminationPaperQuestionAnswer>();
+            ExaminationPaperQuestionIdNavigation = new HashSet<ExaminationPaperQuestion>();
         }
         public string Name { get; set; }
         public int QuestionType { get; set; }
@@ -22,7 +24,7 @@ namespace JuniorMath.ApplicationCore.Entities.QuestionAggregate
         public int CreatedBy { get; set; }
         public bool Active { get; set; }
         public virtual SiteUser CreatedByNavigation { get; set; }
-        public virtual ICollection<StudentExaminationPaperQuestionAnswer> QuestionIdNavigation { get; set; }
-        
+        public virtual ICollection<StudentExaminationPaperQuestionAnswer> PaperQuestionAnswerQuestionIdNavigation { get; set; }
+        public virtual ICollection<ExaminationPaperQuestion> ExaminationPaperQuestionIdNavigation { get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace JuniorMath.ApplicationCore.DTOs.StudentExaminationPaperModel
     public class StudentExaminationPaperModel : IResultable<StudentExaminationPaper, StudentExaminationPaperModel>
     {
         public int Id { get; set; }
+        public int StudentSiteUserId { get; set; }
         public int ExaminationPaperId { get; set; }
         public string ExaminationPaperName { get; set; }
         public string ExaminationPaperDescription { get; set; }
@@ -29,9 +30,10 @@ namespace JuniorMath.ApplicationCore.DTOs.StudentExaminationPaperModel
             return m => new StudentExaminationPaperModel
             {
                 Id = m.Id,
-                ExaminationPaperId = m.ExaminationPaperId,
-                ExaminationPaperName = m.ExaminationPaperIdNavigation.Name,
-                ExaminationPaperDescription = m.ExaminationPaperIdNavigation.Description,
+                StudentSiteUserId = m.SiteUserId,
+                ExaminationPaperId = m.PaperId,
+                ExaminationPaperName = m.PaperIdNavigation.Name,
+                ExaminationPaperDescription = m.PaperIdNavigation.Description,
                 Notes = m.Notes,
                 CreatedDate = m.CreatedDate,
                 CreatedBy = m.CreatedBy,
@@ -49,9 +51,10 @@ namespace JuniorMath.ApplicationCore.DTOs.StudentExaminationPaperModel
                 return new StudentExaminationPaperModel
                 {
                     Id = source.Id,
-                    ExaminationPaperId = source.ExaminationPaperId,
-                    ExaminationPaperName = source.ExaminationPaperIdNavigation.Name,
-                    ExaminationPaperDescription = source.ExaminationPaperIdNavigation.Description,
+                    StudentSiteUserId = source.SiteUserId,
+                    ExaminationPaperId = source.PaperId,
+                    ExaminationPaperName = source.PaperIdNavigation.Name,
+                    ExaminationPaperDescription = source.PaperIdNavigation.Description,
                     Notes = source.Notes,
                     CreatedDate = source.CreatedDate,
                     CreatedBy = source.CreatedBy,
@@ -72,7 +75,8 @@ namespace JuniorMath.ApplicationCore.DTOs.StudentExaminationPaperModel
                 return new StudentExaminationPaper
                 {
                     Id = source.Id,
-                    ExaminationPaperId = source.ExaminationPaperId,
+                    SiteUserId = source.StudentSiteUserId,
+                    PaperId = source.ExaminationPaperId,
                     Notes = source.Notes,
                     CreatedDate = source.CreatedDate,
                     CreatedBy = source.CreatedBy,

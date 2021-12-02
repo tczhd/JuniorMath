@@ -10,7 +10,8 @@ namespace JuniorMath.ApplicationCore.Entities.ExaminationPaperAggregate
     {
         public ExaminationPaper()
         {
-            ExaminationPaperCreatedByNavigation = new HashSet<StudentExaminationPaper>();
+            StudentExaminationPaperIdNavigation = new HashSet<StudentExaminationPaper>();
+            ExaminationPaperQuestionPaperIdNavigation = new HashSet<ExaminationPaperQuestion>();
         }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -18,7 +19,7 @@ namespace JuniorMath.ApplicationCore.Entities.ExaminationPaperAggregate
         public int CreatedBy { get; set; }
         public bool Active { get; set; }
         public virtual SiteUser CreatedByNavigation { get; set; }
-        public virtual ICollection<StudentExaminationPaper> ExaminationPaperCreatedByNavigation { get; set; }
-        
+        public virtual ICollection<StudentExaminationPaper> StudentExaminationPaperIdNavigation { get; set; }
+        public virtual ICollection<ExaminationPaperQuestion> ExaminationPaperQuestionPaperIdNavigation { get; set; }
     }
 }

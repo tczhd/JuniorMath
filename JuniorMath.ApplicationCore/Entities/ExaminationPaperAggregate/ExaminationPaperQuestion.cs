@@ -1,4 +1,5 @@
-﻿using JuniorMath.ApplicationCore.Entities.UserAggregate;
+﻿using JuniorMath.ApplicationCore.Entities.QuestionAggregate;
+using JuniorMath.ApplicationCore.Entities.UserAggregate;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,7 +11,11 @@ namespace JuniorMath.ApplicationCore.Entities.ExaminationPaperAggregate
         public ExaminationPaperQuestion()
         {
         }
-        public int ExaminationPaperId { get; set; }
+        public int PaperId { get; set; }
         public int  QuestionId { get; set; }
+
+        public virtual ExaminationPaper PaperIdNavigation { get; set; }
+
+        public virtual Question QuestionIdNavigation { get; set; }
     }
 }

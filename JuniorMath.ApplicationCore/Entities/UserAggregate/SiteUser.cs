@@ -16,6 +16,7 @@ namespace JuniorMath.ApplicationCore.Entities.UserAggregate
             QuestionCreatedByNavigation = new HashSet<Question>();
             ExaminationPaperCreatedByNavigation = new HashSet<ExaminationPaper>();
             StudentExaminationPaperCreatedByNavigation = new HashSet<StudentExaminationPaper>();
+            StudentExaminationPaperSiteUserIdNavigation = new HashSet<StudentExaminationPaper>();
         }
 
         public string FirstName { get; set; }
@@ -34,6 +35,7 @@ namespace JuniorMath.ApplicationCore.Entities.UserAggregate
         public virtual ICollection<Question> QuestionCreatedByNavigation { get; set; }
         public virtual ICollection<StudentExaminationPaperQuestionAnswer> StudentSiteUserIdNavigation { get; set; }
         public virtual ICollection<ExaminationPaper> ExaminationPaperCreatedByNavigation { get; set; }
+        public virtual ICollection<StudentExaminationPaper> StudentExaminationPaperSiteUserIdNavigation { get; set; }
         public virtual ICollection<StudentExaminationPaper> StudentExaminationPaperCreatedByNavigation { get; set; }
     }
 }

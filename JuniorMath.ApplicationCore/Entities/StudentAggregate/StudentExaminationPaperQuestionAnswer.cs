@@ -15,7 +15,7 @@ namespace JuniorMath.ApplicationCore.Entities.StudentAggregate
         public int QuestionId { get; set; }
         public string Answers { get; set; }
         public int? Marks { get; set; }
-        public virtual SiteUser StudentSiteUserIdNavigation { get; set; }
+        public virtual StudentExaminationPaper StudentExaminationPaperIdNavigation { get; set; }
         public virtual Question QuestionIdNavigation { get; set; }
     }
 }

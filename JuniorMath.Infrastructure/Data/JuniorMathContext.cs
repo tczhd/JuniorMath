@@ -4,6 +4,8 @@ using JuniorMath.ApplicationCore.Entities.CommonAggregate;
 using JuniorMath.ApplicationCore.Entities.SettingsAggregate;
 using JuniorMath.ApplicationCore.Entities.UserAggregate;
 using JuniorMath.ApplicationCore.Entities.QuestionAggregate;
+using JuniorMath.ApplicationCore.Entities.StudentAggregate;
+using JuniorMath.ApplicationCore.Entities.ExaminationPaperAggregate;
 
 namespace JuniorMath.Infrastructure.Data
 {
@@ -27,13 +29,19 @@ namespace JuniorMath.Infrastructure.Data
         public virtual DbSet<SiteUserLevel> SiteUserLevel { get; set; }
         public virtual DbSet<Class> Class { get; set; }
         public virtual DbSet<QuestionImageSetting> QuestionImageSetting { get; set; }
+        public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<ExaminationPaper> ExaminationPapers { get; set; }
+        public virtual DbSet<ExaminationPaperQuestion> ExaminationPaperQuestions { get; set; }
+        public virtual DbSet<StudentExaminationPaper> StudentExaminationPapers { get; set; }
+        public virtual DbSet<StudentExaminationPaperQuestionAnswer> StudentExaminationPaperQuestionAnswers { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-//                optionsBuilder.UseSqlServer("Data Source=DESKTOP-N65A546;Initial Catalog=JuniorMath_Data;User ID=sa;Password=Lq160011;Persist Security Info=True;");
-//            }
+            //            if (!optionsBuilder.IsConfigured)
+            //            {
+            //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+            //                optionsBuilder.UseSqlServer("Data Source=DESKTOP-N65A546;Initial Catalog=JuniorMath_Data;User ID=sa;Password=Lq160011;Persist Security Info=True;");
+            //            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -203,6 +211,62 @@ namespace JuniorMath.Infrastructure.Data
                 .HasMaxLength(1000);
 
                 entity.HasIndex(m => new { m.Name }).IsUnique();
+            });
+
+            modelBuilder.Entity<StudentExaminationPaper>(entity =>
+            {
+                entity.HasOne(d => d.SiteUserIdNavigation)
+                 .WithMany(p => p.StudentExaminationPaperSiteUserIdNavigation)
+                 .HasForeignKey(d => d.SiteUserId)
+                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                 .WithMany(p => p.StudentExaminationPaperCreatedByNavigation)
+                 .HasForeignKey(d => d.CreatedBy)
+                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.PaperIdNavigation)
+                 .WithMany(p => p.StudentExaminationPaperIdNavigation)
+                 .HasForeignKey(d => d.PaperId)
+                 .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+
+            modelBuilder.Entity<StudentExaminationPaperQuestionAnswer>(entity =>
+            {
+                entity.HasOne(d => d.QuestionIdNavigation)
+                 .WithMany(p => p.PaperQuestionAnswerQuestionIdNavigation)
+                 .HasForeignKey(d => d.QuestionId)
+                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.StudentExaminationPaperIdNavigation)
+                 .WithMany(p => p.StudentExaminationPaperQuestionAnswerNavigation)
+                 .HasForeignKey(d => d.StudentExaminationPaperId)
+                 .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+
+            modelBuilder.Entity<ExaminationPaperQuestion>(entity =>
+            {
+                entity.HasOne(d => d.PaperIdNavigation)
+                 .WithMany(p => p.ExaminationPaperQuestionPaperIdNavigation)
+                 .HasForeignKey(d => d.PaperId)
+                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.QuestionIdNavigation)
+                 .WithMany(p => p.ExaminationPaperQuestionIdNavigation)
+                 .HasForeignKey(d => d.QuestionId)
+                 .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+
+            modelBuilder.Entity<ExaminationPaper>(entity =>
+            {
+                entity.Property(e => e.Name)
+               .IsRequired()
+               .HasMaxLength(200);
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                 .WithMany(p => p.ExaminationPaperCreatedByNavigation)
+                 .HasForeignKey(d => d.CreatedBy)
+                 .OnDelete(DeleteBehavior.ClientSetNull);
             });
         }
     }

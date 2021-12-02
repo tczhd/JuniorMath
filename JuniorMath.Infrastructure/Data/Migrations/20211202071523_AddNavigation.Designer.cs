@@ -4,14 +4,16 @@ using JuniorMath.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace JuniorMath.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(JuniorMathContext))]
-    partial class JuniorMathContextModelSnapshot : ModelSnapshot
+    [Migration("20211202071523_AddNavigation")]
+    partial class AddNavigation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,9 +126,7 @@ namespace JuniorMath.Infrastructure.Data.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200);
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
