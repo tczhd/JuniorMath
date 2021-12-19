@@ -10997,12 +10997,12 @@ base-chart.chart {
         padding: 0.5rem 1rem;
         margin-right: 0;
         background-color: #fff;
-        background-image: url("../images/symls_vector_logo.svg");
+        background-image: url("../images/mpm_math_logo.jpg");
         background-repeat: no-repeat;
         background-position: center center;
         background-size: 70px auto;
         border-bottom: 1px solid #c2cfd6;
-        background-size: 128px 40px;
+        background-size: 200px 60px;
     }
 
     .app-header.navbar .navbar-toggler {

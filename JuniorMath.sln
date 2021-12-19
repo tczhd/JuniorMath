@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuniorMath.IntegrationTests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuniorMath.UnitTests", "JuniorMath.UnitTests\JuniorMath.UnitTests.csproj", "{BDC6C66C-0102-4826-95CB-7D584B4BA290}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuniorMath.Backend", "JuniorMath.Backend\JuniorMath.Backend.csproj", "{1ABF4958-A9F6-4161-9160-9CF7D26190A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuniorMath.Backend", "JuniorMath.Backend\JuniorMath.Backend.csproj", "{1ABF4958-A9F6-4161-9160-9CF7D26190A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

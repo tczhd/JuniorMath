@@ -12,4 +12,11 @@ namespace JuniorMath.ApplicationCore.Enums
         [Description("Student")]
         Student = 3
     }
+
+
+    public enum QuestionType
+    {
+        [Description("Image Count")]
+        ImageCount = 1
+    }
 }

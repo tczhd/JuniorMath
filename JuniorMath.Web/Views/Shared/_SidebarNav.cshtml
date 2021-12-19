@@ -16,47 +16,13 @@
             </a>
         </li>
         <li class="nav-item nav-dropdown">
-            <a class="nav-link nav-dropdown-toggle" asp-controller="Patient" asp-action="Index" asp-route-view="Index">
-                <i class="fas fa-user-injured"></i> Patients
+            <a class="nav-link nav-dropdown-toggle" asp-controller="Exam" asp-action="Index" asp-route-view="Index">
+                <i class="fas fa-file-invoice-dollar"></i> Exams
             </a>
             <ul class="nav-dropdown-items">
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Patient" asp-action="Index" asp-route-view="PatientForm">
-                        <i></i>New Patient
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Patient" asp-action="Index" asp-route-view="Index">
-                        <i></i>View Patient
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="nav-item nav-dropdown">
-            <a class="nav-link nav-dropdown-toggle" asp-controller="Item" asp-action="Index" asp-route-view="Index">
-                <i class="fas fa-briefcase-medical"></i> Services
-            </a>
-            <ul class="nav-dropdown-items">
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Item" asp-action="Index" asp-route-view="ItemForm">
-                        <i></i>New Service
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Item" asp-action="Index" asp-route-view="Index">
-                        <i></i>View Services
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="nav-item nav-dropdown">
-            <a class="nav-link nav-dropdown-toggle" asp-controller="Invoice" asp-action="Index" asp-route-view="Index">
-                <i class="fas fa-file-invoice-dollar"></i> Invoices
-            </a>
-            <ul class="nav-dropdown-items">
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Invoice" asp-action="Index" asp-route-view="Index">
-                        <i></i>View Invoice
+                    <a class="nav-link" asp-area="" asp-controller="Exam" asp-action="Index" asp-route-view="Index">
+                        <i></i>View Exams
                     </a>
                 </li>
 
@@ -82,18 +48,8 @@
                     </li>
                 }
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Clinic" asp-action="Index" asp-route-view="Index">
-                        <i></i>Clinic Info
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
                         <i></i>Profile
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                        <i></i>Two Factor
                     </a>
                 </li>
                 <li class="nav-item">

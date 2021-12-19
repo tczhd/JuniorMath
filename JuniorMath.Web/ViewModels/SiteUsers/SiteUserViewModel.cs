@@ -26,8 +26,8 @@ namespace JuniorMath.Web.ViewModels.SiteUsers
         public string SiteUserLevelName { get; set; }
         [Display(Name = "Site User Level Id")]
         public int SiteUserLevelId { get; set; }
-        [Display(Name = "Is Doctor")]
-        public bool IsDoctor { get; set; }
+        [Display(Name = "Is Teacher")]
+        public bool IsTeacher { get; set; }
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
