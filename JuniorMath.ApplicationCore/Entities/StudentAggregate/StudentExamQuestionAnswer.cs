@@ -6,16 +6,19 @@ using System.Text;
 
 namespace JuniorMath.ApplicationCore.Entities.StudentAggregate
 {
-    public partial class StudentExaminationPaperQuestionAnswer : BaseEntity
+    public partial class StudentExamQuestionAnswer : BaseEntity
     {
-        public StudentExaminationPaperQuestionAnswer()
+        public StudentExamQuestionAnswer()
         {
+            StudentExamQuestionAnswerDetailCollection = new HashSet<StudentExamQuestionAnswerDetail>();
         }
-        public int StudentExaminationPaperId { get; set; }
+        public int StudentExamId { get; set; }
         public int QuestionId { get; set; }
         public string Answers { get; set; }
         public int? Marks { get; set; }
-        public virtual StudentExaminationPaper StudentExaminationPaperIdNavigation { get; set; }
+        public virtual StudentExam StudentExamIdNavigation { get; set; }
         public virtual Question QuestionIdNavigation { get; set; }
+        public virtual ICollection<StudentExamQuestionAnswerDetail> StudentExamQuestionAnswerDetailCollection { get; set; }
+
     }
 }

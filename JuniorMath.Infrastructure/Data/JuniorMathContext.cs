@@ -5,7 +5,7 @@ using JuniorMath.ApplicationCore.Entities.SettingsAggregate;
 using JuniorMath.ApplicationCore.Entities.UserAggregate;
 using JuniorMath.ApplicationCore.Entities.QuestionAggregate;
 using JuniorMath.ApplicationCore.Entities.StudentAggregate;
-using JuniorMath.ApplicationCore.Entities.ExaminationPaperAggregate;
+using JuniorMath.ApplicationCore.Entities.ExamAggregate;
 
 namespace JuniorMath.Infrastructure.Data
 {
@@ -30,11 +30,11 @@ namespace JuniorMath.Infrastructure.Data
         public virtual DbSet<Class> Class { get; set; }
         public virtual DbSet<QuestionImageSetting> QuestionImageSetting { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
-        public virtual DbSet<ExaminationPaper> ExaminationPapers { get; set; }
-        public virtual DbSet<ExaminationPaperQuestion> ExaminationPaperQuestions { get; set; }
-        public virtual DbSet<StudentExaminationPaper> StudentExaminationPapers { get; set; }
-        public virtual DbSet<StudentExaminationPaperQuestionAnswer> StudentExaminationPaperQuestionAnswers { get; set; }
-
+        public virtual DbSet<Exam> Exam { get; set; }
+        public virtual DbSet<StudentExam> StudentExam { get; set; }
+        public virtual DbSet<StudentExamQuestionAnswer> StudentExamQuestionAnswers { get; set; }
+        public virtual DbSet<QuestionDetail> QuestionDetail { get; set; }
+        public virtual DbSet<StudentExamQuestionAnswerDetail> StudentExamQuestionAnswerDetail { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //            if (!optionsBuilder.IsConfigured)
@@ -95,7 +95,7 @@ namespace JuniorMath.Infrastructure.Data
                     .HasConstraintName("FK_Address_Country");
 
                 entity.HasOne(d => d.CreatedByNavigation)
-                    .WithMany(p => p.AddressCreatedByNavigation)
+                    .WithMany(p => p.AddressCreatedByCollection)
                     .HasForeignKey(d => d.CreatedBy)
                     .OnDelete(DeleteBehavior.ClientSetNull);
 
@@ -105,7 +105,7 @@ namespace JuniorMath.Infrastructure.Data
                     .HasConstraintName("FK_Address_Region");
 
                 entity.HasOne(d => d.UpdatedByNavigation)
-                    .WithMany(p => p.AddressUpdatedByNavigation)
+                    .WithMany(p => p.AddressUpdatedByCollection)
                     .HasForeignKey(d => d.UpdatedBy);
             });
 
@@ -202,70 +202,83 @@ namespace JuniorMath.Infrastructure.Data
                 .IsRequired()
                 .HasMaxLength(200);
 
-                entity.Property(e => e.ImageOrders)
-                .IsRequired()
-                .HasMaxLength(1000);
-
                 entity.Property(e => e.CorrectAnswers)
                 .IsRequired()
                 .HasMaxLength(1000);
 
                 entity.HasIndex(m => new { m.Name }).IsUnique();
+
+                entity.HasOne(d => d.ExamIdNavigation)
+                .WithMany(p => p.QuestionCollection)
+                .HasForeignKey(d => d.ExamId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
-            modelBuilder.Entity<StudentExaminationPaper>(entity =>
+            modelBuilder.Entity<StudentExam>(entity =>
             {
-                entity.HasOne(d => d.SiteUserIdNavigation)
-                 .WithMany(p => p.StudentExaminationPaperSiteUserIdNavigation)
-                 .HasForeignKey(d => d.SiteUserId)
+                entity.HasOne(d => d.SubmittedByNavigation)
+                 .WithMany(p => p.StudentExamCreatedByCollection)
+                 .HasForeignKey(d => d.SubmittedBy)
                  .OnDelete(DeleteBehavior.ClientSetNull);
 
-                entity.HasOne(d => d.CreatedByNavigation)
-                 .WithMany(p => p.StudentExaminationPaperCreatedByNavigation)
-                 .HasForeignKey(d => d.CreatedBy)
-                 .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.PaperIdNavigation)
-                 .WithMany(p => p.StudentExaminationPaperIdNavigation)
-                 .HasForeignKey(d => d.PaperId)
+                entity.HasOne(d => d.ExamIdNavigation)
+                 .WithMany(p => p.StudentExamCollection)
+                 .HasForeignKey(d => d.EaxmId)
                  .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
-            modelBuilder.Entity<StudentExaminationPaperQuestionAnswer>(entity =>
+            modelBuilder.Entity<StudentExamQuestionAnswer>(entity =>
             {
                 entity.HasOne(d => d.QuestionIdNavigation)
-                 .WithMany(p => p.PaperQuestionAnswerQuestionIdNavigation)
+                 .WithMany(p => p.StudentExamQuestionAnswerCollection)
                  .HasForeignKey(d => d.QuestionId)
                  .OnDelete(DeleteBehavior.ClientSetNull);
 
-                entity.HasOne(d => d.StudentExaminationPaperIdNavigation)
-                 .WithMany(p => p.StudentExaminationPaperQuestionAnswerNavigation)
-                 .HasForeignKey(d => d.StudentExaminationPaperId)
+                entity.HasOne(d => d.StudentExamIdNavigation)
+                 .WithMany(p => p.StudentExamQuestionAnswerCollection)
+                 .HasForeignKey(d => d.StudentExamId)
                  .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
-            modelBuilder.Entity<ExaminationPaperQuestion>(entity =>
-            {
-                entity.HasOne(d => d.PaperIdNavigation)
-                 .WithMany(p => p.ExaminationPaperQuestionPaperIdNavigation)
-                 .HasForeignKey(d => d.PaperId)
-                 .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.QuestionIdNavigation)
-                 .WithMany(p => p.ExaminationPaperQuestionIdNavigation)
-                 .HasForeignKey(d => d.QuestionId)
-                 .OnDelete(DeleteBehavior.ClientSetNull);
-            });
-
-            modelBuilder.Entity<ExaminationPaper>(entity =>
+            modelBuilder.Entity<Exam>(entity =>
             {
                 entity.Property(e => e.Name)
                .IsRequired()
                .HasMaxLength(200);
 
                 entity.HasOne(d => d.CreatedByNavigation)
-                 .WithMany(p => p.ExaminationPaperCreatedByNavigation)
+                 .WithMany(p => p.ExamCreatedByCollection)
                  .HasForeignKey(d => d.CreatedBy)
+                 .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+
+            modelBuilder.Entity<QuestionDetail>(entity =>
+            {
+                entity.Property(e => e.GroupName)
+               .IsRequired()
+               .HasMaxLength(100);
+
+                entity.HasOne(d => d.QuestionIdNavigation)
+                 .WithMany(p => p.QuestionDetailCollection)
+                 .HasForeignKey(d => d.QuestionId)
+                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.QuestionImageSettingIdNavigation)
+                 .WithMany(p => p.QuestionDetailCollection)
+                 .HasForeignKey(d => d.QuestionImageSettingId)
+                 .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+
+            modelBuilder.Entity<StudentExamQuestionAnswerDetail>(entity =>
+            {
+                entity.HasOne(d => d.StudentExamQuestionAnswerIdNavigation)
+                 .WithMany(p => p.StudentExamQuestionAnswerDetailCollection)
+                 .HasForeignKey(d => d.StudentExamQuestionAnswerId)
+                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.QuestionDetailIdNavigation)
+                 .WithMany(p => p.StudentExamQuestionAnswerDetailCollection)
+                 .HasForeignKey(d => d.QuestionDetailId)
                  .OnDelete(DeleteBehavior.ClientSetNull);
             });
         }

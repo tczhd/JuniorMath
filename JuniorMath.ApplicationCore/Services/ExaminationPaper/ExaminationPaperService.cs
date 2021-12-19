@@ -13,10 +13,10 @@ namespace JuniorMath.ApplicationCore.Services.ExaminationPaper
 {
     public class ExaminationPaperService : IExaminationPaperService
     {
-        private readonly IRepository<StudentExaminationPaper> _studentExaminationPaperRepository;
+        private readonly IRepository<StudentExam> _studentExaminationPaperRepository;
         private readonly UserHandler _userHandler;
 
-        public ExaminationPaperService(IRepository<StudentExaminationPaper> studentExaminationPaperRepository, UserHandler userHandler)
+        public ExaminationPaperService(IRepository<StudentExam> studentExaminationPaperRepository, UserHandler userHandler)
         {
             _studentExaminationPaperRepository = studentExaminationPaperRepository;
             _userHandler = userHandler;

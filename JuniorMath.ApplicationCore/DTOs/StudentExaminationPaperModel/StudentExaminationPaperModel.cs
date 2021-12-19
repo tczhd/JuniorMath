@@ -7,58 +7,51 @@ using System.Text;
 
 namespace JuniorMath.ApplicationCore.DTOs.StudentExaminationPaperModel
 {
-    public class StudentExaminationPaperModel : IResultable<StudentExaminationPaper, StudentExaminationPaperModel>
+    public class StudentExaminationPaperModel : IResultable<StudentExam, StudentExaminationPaperModel>
     {
         public int Id { get; set; }
-        public int StudentSiteUserId { get; set; }
-        public int ExaminationPaperId { get; set; }
-        public string ExaminationPaperName { get; set; }
-        public string ExaminationPaperDescription { get; set; }
+        public int ExamId { get; set; }
+        public string ExamName { get; set; }
+        public string ExamDescription { get; set; }
         public string Notes { get; set; }
         public DateTime CreatedDate { get; set; }
-        public int CreatedBy { get; set; }
+        public int SubmittedBy { get; set; }
         public bool Active { get; set; }
         public int? TotalMarks { get; set; }
         public bool Submitted { get; set; }
-        public DateTime? SubmittedDate { get; set; }
-        public List<StudentExaminationPaperQuestionAnswerModel>
+        public DateTime SubmittedDate { get; set; }
+        public List<StudentExamQuestionAnswerModel>
             StudentExaminationPaperQuestionAnswers
         { get; set; }
 
-        public Expression<Func<StudentExaminationPaper, StudentExaminationPaperModel>> CreateResult()
+        public Expression<Func<StudentExam, StudentExaminationPaperModel>> CreateResult()
         {
             return m => new StudentExaminationPaperModel
             {
                 Id = m.Id,
-                StudentSiteUserId = m.SiteUserId,
-                ExaminationPaperId = m.PaperId,
-                ExaminationPaperName = m.PaperIdNavigation.Name,
-                ExaminationPaperDescription = m.PaperIdNavigation.Description,
+                ExamId = m.EaxmId,
+                ExamName = m.ExamIdNavigation.Name,
+                ExamDescription = m.ExamIdNavigation.Description,
                 Notes = m.Notes,
-                CreatedDate = m.CreatedDate,
-                CreatedBy = m.CreatedBy,
-                Active = m.Active,
+                SubmittedBy = m.SubmittedBy,
                 TotalMarks = m.TotalMarks,
                 Submitted = m.Submitted,
                 SubmittedDate = m.SubmittedDate
             };
         }
 
-        public static implicit operator StudentExaminationPaperModel(StudentExaminationPaper source)
+        public static implicit operator StudentExaminationPaperModel(StudentExam source)
         {
             if (source != null)
             {
                 return new StudentExaminationPaperModel
                 {
                     Id = source.Id,
-                    StudentSiteUserId = source.SiteUserId,
-                    ExaminationPaperId = source.PaperId,
-                    ExaminationPaperName = source.PaperIdNavigation.Name,
-                    ExaminationPaperDescription = source.PaperIdNavigation.Description,
+                    ExamId = source.EaxmId,
+                    ExamName = source.ExamIdNavigation.Name,
+                    ExamDescription = source.ExamIdNavigation.Description,
                     Notes = source.Notes,
-                    CreatedDate = source.CreatedDate,
-                    CreatedBy = source.CreatedBy,
-                    Active = source.Active,
+                    SubmittedBy = source.SubmittedBy,
                     TotalMarks = source.TotalMarks,
                     Submitted = source.Submitted,
                     SubmittedDate = source.SubmittedDate
@@ -68,19 +61,16 @@ namespace JuniorMath.ApplicationCore.DTOs.StudentExaminationPaperModel
             return null;
         }
 
-        public static implicit operator StudentExaminationPaper(StudentExaminationPaperModel source)
+        public static implicit operator StudentExam(StudentExaminationPaperModel source)
         {
             if (source != null)
             {
-                return new StudentExaminationPaper
+                return new StudentExam
                 {
                     Id = source.Id,
-                    SiteUserId = source.StudentSiteUserId,
-                    PaperId = source.ExaminationPaperId,
+                    EaxmId = source.ExamId,
                     Notes = source.Notes,
-                    CreatedDate = source.CreatedDate,
-                    CreatedBy = source.CreatedBy,
-                    Active = source.Active,
+                    SubmittedBy = source.SubmittedBy,
                     TotalMarks = source.TotalMarks,
                     Submitted = source.Submitted,
                     SubmittedDate = source.SubmittedDate

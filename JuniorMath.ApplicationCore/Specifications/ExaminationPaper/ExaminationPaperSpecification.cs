@@ -6,18 +6,17 @@ using System.Text;
 
 namespace JuniorMath.ApplicationCore.Specifications.ExaminationPaper
 {
-    public class ExaminationPaperSpecification : BaseSpecification<StudentExaminationPaper>
+    public class ExaminationPaperSpecification : BaseSpecification<StudentExam>
     {
         public ExaminationPaperSpecification() : base()
         {
-            AddInclude(b => b.SiteUserIdNavigation);
-            AddInclude(b => b.CreatedByNavigation);
-            AddInclude(b => b.PaperIdNavigation);
+            AddInclude(b => b.SubmittedByNavigation);
+            AddInclude(b => b.ExamIdNavigation);
         }
 
         public void AddStudentSiteUserId(int siteUserId)
         {
-            AddCriteria(q => q.SiteUserId == siteUserId);
+            AddCriteria(q => q.SubmittedBy == siteUserId);
         }
     }
 }

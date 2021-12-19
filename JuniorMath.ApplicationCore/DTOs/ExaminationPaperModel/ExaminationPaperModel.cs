@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
-using JuniorMath.ApplicationCore.Entities.ExaminationPaperAggregate;
+using JuniorMath.ApplicationCore.Entities.ExamAggregate;
 
 namespace JuniorMath.ApplicationCore.DTOs.ExaminationPaperModel
 {
-    public class ExaminationPaperModel : IResultable<ExaminationPaper, ExaminationPaperModel>
+    public class ExaminationPaperModel : IResultable<Exam, ExaminationPaperModel>
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -16,7 +16,7 @@ namespace JuniorMath.ApplicationCore.DTOs.ExaminationPaperModel
         public int CreatedBy { get; set; }
         public bool Active { get; set; }
 
-        public Expression<Func<ExaminationPaper, ExaminationPaperModel>> CreateResult()
+        public Expression<Func<Exam, ExaminationPaperModel>> CreateResult()
         {
             return m => new ExaminationPaperModel
             {
@@ -29,7 +29,7 @@ namespace JuniorMath.ApplicationCore.DTOs.ExaminationPaperModel
             };
         }
 
-        public static implicit operator ExaminationPaperModel(ExaminationPaper source)
+        public static implicit operator ExaminationPaperModel(Exam source)
         {
             if (source != null)
             {
@@ -47,11 +47,11 @@ namespace JuniorMath.ApplicationCore.DTOs.ExaminationPaperModel
             return null;
         }
 
-        public static implicit operator ExaminationPaper(ExaminationPaperModel source)
+        public static implicit operator Exam(ExaminationPaperModel source)
         {
             if (source != null)
             {
-                return new ExaminationPaper
+                return new Exam
                 {
                     Id = source.Id,
                     Name = source.Name,

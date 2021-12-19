@@ -7,8 +7,8 @@ using System.Text;
 
 namespace JuniorMath.ApplicationCore.DTOs.StudentExaminationPaperModel
 {
-    public class StudentExaminationPaperQuestionAnswerModel
-        : IResultable<StudentExaminationPaperQuestionAnswer, StudentExaminationPaperQuestionAnswerModel>
+    public class StudentExamQuestionAnswerModel
+        : IResultable<StudentExamQuestionAnswer, StudentExamQuestionAnswerModel>
     {
         public int Id { get; set; }
         public int QuestionId { get; set; }
@@ -20,16 +20,15 @@ namespace JuniorMath.ApplicationCore.DTOs.StudentExaminationPaperModel
         public int QuestionMarks { get; set; }
         public string StudentAnswers { get; set; }
         public int? StudentMarks { get; set; }
-        public Expression<Func<StudentExaminationPaperQuestionAnswer, StudentExaminationPaperQuestionAnswerModel>> CreateResult()
+        public Expression<Func<StudentExamQuestionAnswer, StudentExamQuestionAnswerModel>> CreateResult()
         {
-            return m => new StudentExaminationPaperQuestionAnswerModel
+            return m => new StudentExamQuestionAnswerModel
             {
                 Id = m.Id,
                 QuestionId = m.QuestionId,
                 QuestionName = m.QuestionIdNavigation.Name,
                 QuestionType = m.QuestionIdNavigation.QuestionType,
                 QuestionDescription = m.QuestionIdNavigation.Description,
-                ImageOrders = m.QuestionIdNavigation.ImageOrders,
                 CorrectAnswers = m.QuestionIdNavigation.CorrectAnswers,
                 QuestionMarks = m.QuestionIdNavigation.Marks,
                 StudentAnswers = m.Answers,
@@ -37,18 +36,17 @@ namespace JuniorMath.ApplicationCore.DTOs.StudentExaminationPaperModel
             };
         }
 
-        public static implicit operator StudentExaminationPaperQuestionAnswerModel(StudentExaminationPaperQuestionAnswer source)
+        public static implicit operator StudentExamQuestionAnswerModel(StudentExamQuestionAnswer source)
         {
             if (source != null)
             {
-                return new StudentExaminationPaperQuestionAnswerModel
+                return new StudentExamQuestionAnswerModel
                 {
                     Id = source.Id,
                     QuestionId = source.QuestionId,
                     QuestionName = source.QuestionIdNavigation.Name,
                     QuestionType = source.QuestionIdNavigation.QuestionType,
                     QuestionDescription = source.QuestionIdNavigation.Description,
-                    ImageOrders = source.QuestionIdNavigation.ImageOrders,
                     CorrectAnswers = source.QuestionIdNavigation.CorrectAnswers,
                     QuestionMarks = source.QuestionIdNavigation.Marks,
                     StudentAnswers = source.Answers,
@@ -59,11 +57,11 @@ namespace JuniorMath.ApplicationCore.DTOs.StudentExaminationPaperModel
             return null;
         }
 
-        public static implicit operator StudentExaminationPaperQuestionAnswer(StudentExaminationPaperQuestionAnswerModel source)
+        public static implicit operator StudentExamQuestionAnswer(StudentExamQuestionAnswerModel source)
         {
             if (source != null)
             {
-                return new StudentExaminationPaperQuestionAnswer
+                return new StudentExamQuestionAnswer
                 {
                     Id = source.Id,
                     Answers = source.StudentAnswers,

@@ -1,5 +1,5 @@
 ﻿using JuniorMath.ApplicationCore.Entities.CommonAggregate;
-using JuniorMath.ApplicationCore.Entities.ExaminationPaperAggregate;
+using JuniorMath.ApplicationCore.Entities.ExamAggregate;
 using JuniorMath.ApplicationCore.Entities.QuestionAggregate;
 using JuniorMath.ApplicationCore.Entities.StudentAggregate;
 using System.Collections.Generic;
@@ -11,12 +11,12 @@ namespace JuniorMath.ApplicationCore.Entities.UserAggregate
     {
         public SiteUser()
         {
-            AddressCreatedByNavigation = new HashSet<Address>();
-            AddressUpdatedByNavigation = new HashSet<Address>();
-            QuestionCreatedByNavigation = new HashSet<Question>();
-            ExaminationPaperCreatedByNavigation = new HashSet<ExaminationPaper>();
-            StudentExaminationPaperCreatedByNavigation = new HashSet<StudentExaminationPaper>();
-            StudentExaminationPaperSiteUserIdNavigation = new HashSet<StudentExaminationPaper>();
+            AddressCreatedByCollection = new HashSet<Address>();
+            AddressUpdatedByCollection = new HashSet<Address>();
+            QuestionCreatedByCollection = new HashSet<Question>();
+            ExamCreatedByCollection = new HashSet<Exam>();
+            StudentExamCreatedByCollection = new HashSet<StudentExam>();
+            StudentExamSiteUserIdCollection = new HashSet<StudentExam>();
         }
 
         public string FirstName { get; set; }
@@ -30,12 +30,12 @@ namespace JuniorMath.ApplicationCore.Entities.UserAggregate
 
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual SiteUserLevel SiteUserLevel { get; set; }
-        public virtual ICollection<Address> AddressCreatedByNavigation { get; set; }
-        public virtual ICollection<Address> AddressUpdatedByNavigation { get; set; }
-        public virtual ICollection<Question> QuestionCreatedByNavigation { get; set; }
-        public virtual ICollection<StudentExaminationPaperQuestionAnswer> StudentSiteUserIdNavigation { get; set; }
-        public virtual ICollection<ExaminationPaper> ExaminationPaperCreatedByNavigation { get; set; }
-        public virtual ICollection<StudentExaminationPaper> StudentExaminationPaperSiteUserIdNavigation { get; set; }
-        public virtual ICollection<StudentExaminationPaper> StudentExaminationPaperCreatedByNavigation { get; set; }
+        public virtual ICollection<Address> AddressCreatedByCollection { get; set; }
+        public virtual ICollection<Address> AddressUpdatedByCollection { get; set; }
+        public virtual ICollection<Question> QuestionCreatedByCollection { get; set; }
+        public virtual ICollection<StudentExamQuestionAnswer> StudentExamQuestionAnswerCollection { get; set; }
+        public virtual ICollection<Exam> ExamCreatedByCollection { get; set; }
+        public virtual ICollection<StudentExam> StudentExamSiteUserIdCollection { get; set; }
+        public virtual ICollection<StudentExam> StudentExamCreatedByCollection { get; set; }
     }
 }

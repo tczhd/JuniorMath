@@ -4,14 +4,16 @@ using JuniorMath.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace JuniorMath.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(JuniorMathContext))]
-    partial class JuniorMathContextModelSnapshot : ModelSnapshot
+    [Migration("20211219065938_AddQuestionDetailtables")]
+    partial class AddQuestionDetailtables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,7 +134,7 @@ namespace JuniorMath.Infrastructure.Data.Migrations
 
                     b.HasIndex("CreatedBy");
 
-                    b.ToTable("Exam");
+                    b.ToTable("ExaminationPapers");
                 });
 
             modelBuilder.Entity("JuniorMath.ApplicationCore.Entities.QuestionAggregate.Question", b =>
@@ -281,7 +283,7 @@ namespace JuniorMath.Infrastructure.Data.Migrations
 
                     b.HasIndex("SubmittedBy");
 
-                    b.ToTable("StudentExam");
+                    b.ToTable("StudentExaminationPapers");
                 });
 
             modelBuilder.Entity("JuniorMath.ApplicationCore.Entities.StudentAggregate.StudentExamQuestionAnswer", b =>
@@ -308,7 +310,7 @@ namespace JuniorMath.Infrastructure.Data.Migrations
 
                     b.HasIndex("StudentExamId");
 
-                    b.ToTable("StudentExamQuestionAnswers");
+                    b.ToTable("StudentExaminationPaperQuestionAnswers");
                 });
 
             modelBuilder.Entity("JuniorMath.ApplicationCore.Entities.StudentAggregate.StudentExamQuestionAnswerDetail", b =>
