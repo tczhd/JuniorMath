@@ -212,6 +212,11 @@ namespace JuniorMath.Infrastructure.Data
                 .WithMany(p => p.QuestionCollection)
                 .HasForeignKey(d => d.ExamId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                 .WithMany(p => p.QuestionCreatedByCollection)
+                 .HasForeignKey(d => d.CreatedBy)
+                 .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<StudentExam>(entity =>
