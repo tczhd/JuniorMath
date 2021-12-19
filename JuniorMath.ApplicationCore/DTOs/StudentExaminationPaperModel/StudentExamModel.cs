@@ -7,7 +7,7 @@ using System.Text;
 
 namespace JuniorMath.ApplicationCore.DTOs.StudentExaminationPaperModel
 {
-    public class StudentExaminationPaperModel : IResultable<StudentExam, StudentExaminationPaperModel>
+    public class StudentExamModel : IResultable<StudentExam, StudentExamModel>
     {
         public int Id { get; set; }
         public int ExamId { get; set; }
@@ -24,9 +24,9 @@ namespace JuniorMath.ApplicationCore.DTOs.StudentExaminationPaperModel
             StudentExaminationPaperQuestionAnswers
         { get; set; }
 
-        public Expression<Func<StudentExam, StudentExaminationPaperModel>> CreateResult()
+        public Expression<Func<StudentExam, StudentExamModel>> CreateResult()
         {
-            return m => new StudentExaminationPaperModel
+            return m => new StudentExamModel
             {
                 Id = m.Id,
                 ExamId = m.EaxmId,
@@ -40,11 +40,11 @@ namespace JuniorMath.ApplicationCore.DTOs.StudentExaminationPaperModel
             };
         }
 
-        public static implicit operator StudentExaminationPaperModel(StudentExam source)
+        public static implicit operator StudentExamModel(StudentExam source)
         {
             if (source != null)
             {
-                return new StudentExaminationPaperModel
+                return new StudentExamModel
                 {
                     Id = source.Id,
                     ExamId = source.EaxmId,
@@ -61,7 +61,7 @@ namespace JuniorMath.ApplicationCore.DTOs.StudentExaminationPaperModel
             return null;
         }
 
-        public static implicit operator StudentExam(StudentExaminationPaperModel source)
+        public static implicit operator StudentExam(StudentExamModel source)
         {
             if (source != null)
             {

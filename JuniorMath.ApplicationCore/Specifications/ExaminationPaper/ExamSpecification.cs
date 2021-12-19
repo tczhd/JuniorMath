@@ -6,9 +6,9 @@ using System.Text;
 
 namespace JuniorMath.ApplicationCore.Specifications.ExaminationPaper
 {
-    public class ExaminationPaperSpecification : BaseSpecification<StudentExam>
+    public class ExamSpecification : BaseSpecification<StudentExam>
     {
-        public ExaminationPaperSpecification() : base()
+        public ExamSpecification() : base()
         {
             AddInclude(b => b.SubmittedByNavigation);
             AddInclude(b => b.ExamIdNavigation);

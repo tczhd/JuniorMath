@@ -174,7 +174,7 @@ namespace JuniorMath.Web
         {
             services.AddScoped<IUtilityService, UtilityService>();
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IExaminationPaperService, ExaminationPaperService>();
+            services.AddScoped<IExamService, ExamService>();
         }
     }
 }

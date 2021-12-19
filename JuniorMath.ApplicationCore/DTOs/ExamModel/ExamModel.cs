@@ -7,7 +7,7 @@ using JuniorMath.ApplicationCore.Entities.ExamAggregate;
 
 namespace JuniorMath.ApplicationCore.DTOs.ExaminationPaperModel
 {
-    public class ExaminationPaperModel : IResultable<Exam, ExaminationPaperModel>
+    public class ExamModel : IResultable<Exam, ExamModel>
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -16,9 +16,9 @@ namespace JuniorMath.ApplicationCore.DTOs.ExaminationPaperModel
         public int CreatedBy { get; set; }
         public bool Active { get; set; }
 
-        public Expression<Func<Exam, ExaminationPaperModel>> CreateResult()
+        public Expression<Func<Exam, ExamModel>> CreateResult()
         {
-            return m => new ExaminationPaperModel
+            return m => new ExamModel
             {
                 Id = m.Id,
                 Name= m.Name,
@@ -29,11 +29,11 @@ namespace JuniorMath.ApplicationCore.DTOs.ExaminationPaperModel
             };
         }
 
-        public static implicit operator ExaminationPaperModel(Exam source)
+        public static implicit operator ExamModel(Exam source)
         {
             if (source != null)
             {
-                return new ExaminationPaperModel
+                return new ExamModel
                 {
                     Id = source.Id,
                     Name = source.Name,
@@ -47,7 +47,7 @@ namespace JuniorMath.ApplicationCore.DTOs.ExaminationPaperModel
             return null;
         }
 
-        public static implicit operator Exam(ExaminationPaperModel source)
+        public static implicit operator Exam(ExamModel source)
         {
             if (source != null)
             {

@@ -5,8 +5,8 @@ using System.Text;
 
 namespace JuniorMath.ApplicationCore.Interfaces.Services.ExaminationPaper
 {
-    public interface IExaminationPaperService
+    public interface IExamService
     {
-        List<StudentExaminationPaperModel> GetStudentExaminationPaperModel(int studentSiteUserId);
+        List<StudentExamModel> GetStudentExamModel(int studentSiteUserId);
     }
 }
