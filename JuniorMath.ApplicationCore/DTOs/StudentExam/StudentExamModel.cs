@@ -5,17 +5,19 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace JuniorMath.ApplicationCore.DTOs.StudentExaminationPaperModel
+namespace JuniorMath.ApplicationCore.DTOs.StudentExam
 {
-    public class StudentExamModel : IResultable<StudentExam, StudentExamModel>
+    public class StudentExamModel : IResultable<Entities.StudentAggregate.StudentExam, StudentExamModel>
     {
         public int Id { get; set; }
         public int ExamId { get; set; }
         public string ExamName { get; set; }
         public string ExamDescription { get; set; }
+        public string Teacher { get; set; }
         public string Notes { get; set; }
         public DateTime CreatedDate { get; set; }
         public int SubmittedBy { get; set; }
+        public string SubmittedName { get; set; }
         public bool Active { get; set; }
         public int? TotalMarks { get; set; }
         public bool Submitted { get; set; }
@@ -24,7 +26,7 @@ namespace JuniorMath.ApplicationCore.DTOs.StudentExaminationPaperModel
             StudentExaminationPaperQuestionAnswers
         { get; set; }
 
-        public Expression<Func<StudentExam, StudentExamModel>> CreateResult()
+        public Expression<Func<Entities.StudentAggregate.StudentExam, StudentExamModel>> CreateResult()
         {
             return m => new StudentExamModel
             {
@@ -32,15 +34,17 @@ namespace JuniorMath.ApplicationCore.DTOs.StudentExaminationPaperModel
                 ExamId = m.EaxmId,
                 ExamName = m.ExamIdNavigation.Name,
                 ExamDescription = m.ExamIdNavigation.Description,
+                Teacher = m.ExamIdNavigation.CreatedByNavigation.FirstName + " " + m.ExamIdNavigation.CreatedByNavigation.LastName,
                 Notes = m.Notes,
                 SubmittedBy = m.SubmittedBy,
+                SubmittedName = m.SubmittedByNavigation.FirstName +  " " + m.SubmittedByNavigation.LastName,
                 TotalMarks = m.TotalMarks,
                 Submitted = m.Submitted,
                 SubmittedDate = m.SubmittedDate
             };
         }
 
-        public static implicit operator StudentExamModel(StudentExam source)
+        public static implicit operator StudentExamModel(Entities.StudentAggregate.StudentExam source)
         {
             if (source != null)
             {
@@ -61,11 +65,11 @@ namespace JuniorMath.ApplicationCore.DTOs.StudentExaminationPaperModel
             return null;
         }
 
-        public static implicit operator StudentExam(StudentExamModel source)
+        public static implicit operator Entities.StudentAggregate.StudentExam(StudentExamModel source)
         {
             if (source != null)
             {
-                return new StudentExam
+                return new Entities.StudentAggregate.StudentExam
                 {
                     Id = source.Id,
                     EaxmId = source.ExamId,

@@ -1,4 +1,5 @@
 ﻿using JuniorMath.ApplicationCore.Domain.User;
+using JuniorMath.ApplicationCore.DTOs.User;
 using JuniorMath.ApplicationCore.Interfaces.Services.ExaminationPaper;
 using JuniorMath.Web.ViewModels.Exam;
 using Microsoft.AspNetCore.Authorization;
@@ -16,22 +17,49 @@ namespace JuniorMath.Web.Controllers
     {
         private readonly IExamService _examService;
         private readonly UserHandler _userHandler;
-
+        private readonly UserContext _userContext;
         public ExamController(IExamService examService, UserHandler userHandler)
         {
             _examService = examService;
             _userHandler = userHandler;
+            _userContext = _userHandler.GetUserContext();
         }
-        public IActionResult Index()
+
+        [Route("{view=Index}")]
+        public IActionResult Index(int id, string view)
         {
-            var userContext = _userHandler.GetUserContext();
+            if (view == "Index")
+            {
+                ViewData["Title"] = $"Exam List";
+                return GetIndexView();
+            }
+            else if(view == "ExamPaper")
+            {
+                ViewData["Title"] = $"Exam Paper";
+                return GetExamPaperView(id, view);
+            }
+            else {
+                return View();
+            }
+        }
 
-            ViewData["Title"] = $"Exam List";
+        private ViewResult GetIndexView()
+        {
+            var examGroupViewModel = new ExamGroupViewModel();
+            var exams = _examService.GetExams(true);
+            examGroupViewModel.Exams = exams.Select(p => (ExamViewModel)p).ToList();
 
-            var studentExams = _examService.GetStudentExamModel(userContext.SiteUserId);
+            var studentExams = _examService.GetStudentExams(_userContext.SiteUserId);
+            examGroupViewModel.StudentExams = studentExams.Select(p => (StudentExamViewModel)p).ToList();
 
-            var data = studentExams.Select(p => (ExamViewModel)p).ToList();
-            return View(data);
+            return View(examGroupViewModel);
+        }
+
+        private ViewResult GetExamPaperView(int examId, string view)
+        {
+            var exam = _examService.GetExam(examId);
+            var data = (ExamViewModel)exam;
+            return View(view, data);
         }
     }
 }

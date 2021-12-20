@@ -1,6 +1,4 @@
-﻿using JuniorMath.ApplicationCore.DTOs.Exam;
-using JuniorMath.ApplicationCore.DTOs.StudentExam;
-using JuniorMath.Web.ViewModels.Question;
+﻿using JuniorMath.ApplicationCore.DTOs.StudentExam;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JuniorMath.Web.ViewModels.Exam
 {
-    public class ExamViewModel
+    public class StudentExamViewModel
     {
         [Display(Name = "Exam Id")]
         public int ExamId { get; set; }
@@ -25,20 +23,17 @@ namespace JuniorMath.Web.ViewModels.Exam
         public string Teacher { get; set; }
         [Display(Name = "Status")]
         public bool Active { get; set; }
-        public List<QuestionViewModel> Questions { get; set; }
 
-        public static implicit operator ExamViewModel(ExamModel source)
+        public static implicit operator StudentExamViewModel(StudentExamModel source)
         {
-            return new ExamViewModel
+            return new StudentExamViewModel
             {
                 ExamId = source.Id,
-                CreatedBy = source.CreatedBy,
+                Teacher = source.Teacher,
                 Active = source.Active,
                 CreateDate = source.CreatedDate,
-                Description = source.Description,
-                ExamName = source.Name,
-                Teacher = source.Teacher,
-                Questions = source.Questions.Select(p => (QuestionViewModel)p).ToList()
+                Description = source.ExamDescription,
+                ExamName = source.ExamName
             };
         }
     }

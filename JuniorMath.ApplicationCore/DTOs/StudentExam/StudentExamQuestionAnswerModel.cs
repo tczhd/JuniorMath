@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace JuniorMath.ApplicationCore.DTOs.StudentExaminationPaperModel
+namespace JuniorMath.ApplicationCore.DTOs.StudentExam
 {
     public class StudentExamQuestionAnswerModel
         : IResultable<StudentExamQuestionAnswer, StudentExamQuestionAnswerModel>
