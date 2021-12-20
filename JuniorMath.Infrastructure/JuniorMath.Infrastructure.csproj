@@ -11,6 +11,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20211202071523_AddNavigation.cs" />
+    <Compile Remove="Data\Migrations\20211202071523_AddNavigation.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211202071843_ChangeExaminationNameLength.cs" />
+    <Compile Remove="Data\Migrations\20211202071843_ChangeExaminationNameLength.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211219065938_AddQuestionDetailtables.cs" />
+    <Compile Remove="Data\Migrations\20211219065938_AddQuestionDetailtables.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211219070524_RenameTables.cs" />
+    <Compile Remove="Data\Migrations\20211219070524_RenameTables.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211219071217_ChangeCreateByName.cs" />
+    <Compile Remove="Data\Migrations\20211219071217_ChangeCreateByName.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Data\DatabaseElements\Triggers\" />
     <Folder Include="Data\DatabaseElements\Views\" />
     <Folder Include="Services\Redis\" />

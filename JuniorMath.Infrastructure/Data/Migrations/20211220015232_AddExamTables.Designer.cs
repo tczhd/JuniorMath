@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JuniorMath.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(JuniorMathContext))]
-    [Migration("20211219070524_RenameTables")]
-    partial class RenameTables
+    [Migration("20211220015232_AddExamTables")]
+    partial class AddExamTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -139,7 +139,9 @@ namespace JuniorMath.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("JuniorMath.ApplicationCore.Entities.QuestionAggregate.Question", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Active");
 
@@ -148,8 +150,6 @@ namespace JuniorMath.Infrastructure.Data.Migrations
                         .HasMaxLength(1000);
 
                     b.Property<int>("CreatedBy");
-
-                    b.Property<int?>("CreatedByNavigationId");
 
                     b.Property<DateTime>("CreatedDate");
 
@@ -167,7 +167,7 @@ namespace JuniorMath.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedByNavigationId");
+                    b.HasIndex("CreatedBy");
 
                     b.HasIndex("ExamId");
 
@@ -204,7 +204,9 @@ namespace JuniorMath.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("JuniorMath.ApplicationCore.Entities.QuestionAggregate.QuestionImageSetting", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Active");
 
@@ -463,7 +465,7 @@ namespace JuniorMath.Infrastructure.Data.Migrations
                 {
                     b.HasOne("JuniorMath.ApplicationCore.Entities.UserAggregate.SiteUser", "CreatedByNavigation")
                         .WithMany("QuestionCreatedByCollection")
-                        .HasForeignKey("CreatedByNavigationId");
+                        .HasForeignKey("CreatedBy");
 
                     b.HasOne("JuniorMath.ApplicationCore.Entities.ExamAggregate.Exam", "ExamIdNavigation")
                         .WithMany("QuestionCollection")

@@ -137,7 +137,9 @@ namespace JuniorMath.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("JuniorMath.ApplicationCore.Entities.QuestionAggregate.Question", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Active");
 
@@ -200,7 +202,9 @@ namespace JuniorMath.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("JuniorMath.ApplicationCore.Entities.QuestionAggregate.QuestionImageSetting", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Active");
 

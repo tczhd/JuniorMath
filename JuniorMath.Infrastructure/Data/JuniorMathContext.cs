@@ -185,7 +185,6 @@ namespace JuniorMath.Infrastructure.Data
 
             modelBuilder.Entity<QuestionImageSetting>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.ImageName)
                 .IsRequired()
@@ -196,7 +195,6 @@ namespace JuniorMath.Infrastructure.Data
 
             modelBuilder.Entity<Question>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Name)
                 .IsRequired()
