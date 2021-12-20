@@ -132,16 +132,29 @@ h2 {
     height:50px;
 }
 
+    .main .view-exam-paper-content .image-section .image-area img.green-check {
+        display:none;
+    }
+
 .main .view-exam-paper-content .image-section  {
     padding:5px;
+    min-height:240px;
+}
+
+.main .view-exam-paper-content .question-name {
+    font-size:18px;
+    font-weight:bold;
 }
 
     .main .view-exam-paper-content .image-section .image-area {
         padding-right:5px;
+        padding-bottom:5px;
+        cursor:pointer;
     }
 
 .main .view-exam-paper-content .question-detail .question-answer-section {
     margin-top:10px;
+    padding-left:90px;
 }
 
 .main .view-exam-paper-content .question-detail .question-answer-section input{

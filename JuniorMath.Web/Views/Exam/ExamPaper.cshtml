@@ -15,32 +15,50 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header exam-id">
                     <i class="fa fa-align-justify"></i>Exam Questions
+                    <input type="hidden" asp-for="ExamId" id="EaxmHidden-@Model.ExamId" class="hidden-exam-id" />
                 </div>
                 <div class="card-body">
                     @if (Model != null && Model.Questions.Any())
                     {
                         @foreach (var item in Model.Questions)
                         {
-                            <div class="question-section">
-                                @foreach (var questionDetail in item.QuestionDetail)
-                                {
-                                    <div class="question-detail float-left">
-                                        <div class="image-section ">
-                                            <div class="image-area float-left">
-                                                <img src="/images/question_icons/@questionDetail.ImageName" />
+                            <div class="question-block">
+                                <div class="question-name">
+                                    @item.Name
+                                    <input type="hidden" asp-for="@item.QuestionId" id="QuestionHidden-@item.QuestionId" class="hidden-question-id" />
+                                </div>
+                                <div class="question-section">
+                                    @foreach (var questionDetail in item.QuestionDetail)
+                                    {
+                                        <div class="question-detail float-left">
+                                            <input type="hidden" asp-for="@questionDetail.QuestionDetailId" id="QuestionDetailHidden-@questionDetail.QuestionDetailId" class="hidden-question-detail-id" />
+                                            <div class="image-section ">
+                                                @for (int i = 0; i < questionDetail.Count; i++)
+                                                {
+                                                    <div class="image-area float-left">
+                                                        <img src="/images/question_icons/@questionDetail.ImageName" class="question-image" />
+                                                        <img src="/images/Green-check.png" class="green-check" />
+                                                        <input type="hidden" value="0" id="imageHidden-@questionDetail.QuestionDetailId" class="hidden-input" />
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div style="clear:both;"></div>
+                                            <div class="question-answer-section">
+                                                <input id="questionDetailId-@questionDetail.QuestionDetailId" class="form-control input-question-answer" placeholder="Answer" />
                                             </div>
                                         </div>
-                                        <div class="question-answer-section clearfix">
-                                            <input id="questionDetailId-@questionDetail.QuestionDetailId" class="form-control" placeholder="Answer" />
-                                        </div>
-                                    </div>
-                                }
+                                    }
+                                </div>
+                                <div style="clear:both;"></div>
                             </div>
                         }
 
                     }
+                </div>
+                <div class="card-footer add-patient-buttons">
+                    <button type="button" class="btn btn-sm btn-primary" onclick="JuniorMath.ExamPaper.SubmitExamModal()">Submit</button>
                 </div>
             </div>
         </div>
@@ -49,3 +67,8 @@
     <!--/.row-->
 
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/views/Exam/examPaper.js" asp-append-version="true"></script>
+}
