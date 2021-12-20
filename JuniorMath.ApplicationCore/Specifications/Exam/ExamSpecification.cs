@@ -14,7 +14,7 @@ namespace JuniorMath.ApplicationCore.Specifications.Exam
             AddInclude(b => b.CreatedByNavigation);
             AddInclude(b => b.QuestionCollection);
             AddInclude(b => b.StudentExamCollection);
-            AddInclude($"{nameof(ExamAggregate.Exam.QuestionCollection)}.{nameof(Question.QuestionDetailCollection)}");
+            AddInclude($"{nameof(ExamAggregate.Exam.QuestionCollection)}.{nameof(Question.QuestionDetailCollection)}.{nameof(QuestionDetail.QuestionImageSettingIdNavigation)}");
         }
 
         public void AddStatus(bool? Active)

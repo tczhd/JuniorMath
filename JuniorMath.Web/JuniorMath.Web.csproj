@@ -48,7 +48,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\question_icons\" />
     <Folder Include="wwwroot\js\views\SiteUser\" />
   </ItemGroup>
 

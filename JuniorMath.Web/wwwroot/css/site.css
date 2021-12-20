@@ -121,3 +121,30 @@ h2 {
     background-image: url("../images/mpm_math_dashboard1.png");
     background-size: 1300px 600px;
 }
+
+.main .view-exam-paper-content .question-detail {
+    max-width:280px;
+    padding-right:10px;
+}
+
+.main .view-exam-paper-content .image-section .image-area img {
+    width: 50px;
+    height:50px;
+}
+
+.main .view-exam-paper-content .image-section  {
+    padding:5px;
+}
+
+    .main .view-exam-paper-content .image-section .image-area {
+        padding-right:5px;
+    }
+
+.main .view-exam-paper-content .question-detail .question-answer-section {
+    margin-top:10px;
+}
+
+.main .view-exam-paper-content .question-detail .question-answer-section input{
+    width:60px;
+    height:60px;
+}

@@ -9,3 +9,43 @@
 
 <h2>Exam Paper</h2>
 
+<div class="animated fadeIn  view-exam-paper-content">
+    <img id="search-spinner" class="invisible" src='/images/loading.gif' width='30' height='30' />
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i>Exam Questions
+                </div>
+                <div class="card-body">
+                    @if (Model != null && Model.Questions.Any())
+                    {
+                        @foreach (var item in Model.Questions)
+                        {
+                            <div class="question-section">
+                                @foreach (var questionDetail in item.QuestionDetail)
+                                {
+                                    <div class="question-detail float-left">
+                                        <div class="image-section ">
+                                            <div class="image-area float-left">
+                                                <img src="/images/question_icons/@questionDetail.ImageName" />
+                                            </div>
+                                        </div>
+                                        <div class="question-answer-section clearfix">
+                                            <input id="questionDetailId-@questionDetail.QuestionDetailId" class="form-control" placeholder="Answer" />
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+
+                    }
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+    <!--/.row-->
+
+</div>
