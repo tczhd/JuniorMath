@@ -4,14 +4,16 @@ using JuniorMath.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace JuniorMath.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(JuniorMathContext))]
-    partial class JuniorMathContextModelSnapshot : ModelSnapshot
+    [Migration("20211221065826_ChangeAnswerCountsToNULL")]
+    partial class ChangeAnswerCountsToNULL
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,8 +189,6 @@ namespace JuniorMath.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
-                    b.Property<int>("Marks");
-
                     b.Property<int>("QuestionId");
 
                     b.Property<int>("QuestionImageSettingId");
@@ -267,6 +267,8 @@ namespace JuniorMath.Infrastructure.Data.Migrations
 
                     b.Property<string>("Notes");
 
+                    b.Property<int?>("SiteUserId");
+
                     b.Property<bool>("Submitted");
 
                     b.Property<int>("SubmittedBy");
@@ -278,6 +280,8 @@ namespace JuniorMath.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EaxmId");
+
+                    b.HasIndex("SiteUserId");
 
                     b.HasIndex("SubmittedBy");
 
@@ -484,6 +488,10 @@ namespace JuniorMath.Infrastructure.Data.Migrations
                     b.HasOne("JuniorMath.ApplicationCore.Entities.ExamAggregate.Exam", "ExamIdNavigation")
                         .WithMany("StudentExamCollection")
                         .HasForeignKey("EaxmId");
+
+                    b.HasOne("JuniorMath.ApplicationCore.Entities.UserAggregate.SiteUser")
+                        .WithMany("StudentExamSiteUserIdCollection")
+                        .HasForeignKey("SiteUserId");
 
                     b.HasOne("JuniorMath.ApplicationCore.Entities.UserAggregate.SiteUser", "SubmittedByNavigation")
                         .WithMany("StudentExamCreatedByCollection")

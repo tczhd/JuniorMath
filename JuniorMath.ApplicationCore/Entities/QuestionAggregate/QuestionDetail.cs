@@ -14,6 +14,7 @@ namespace JuniorMath.ApplicationCore.Entities.QuestionAggregate
         public int QuestionId { get; set; }
         public int QuestionImageSettingId { get; set; }
         public int Count { get; set; }
+        public int Marks { get; set; }
         public string GroupName { get; set; }
         public virtual Question QuestionIdNavigation { get; set; }
         public virtual QuestionImageSetting QuestionImageSettingIdNavigation { get; set; }

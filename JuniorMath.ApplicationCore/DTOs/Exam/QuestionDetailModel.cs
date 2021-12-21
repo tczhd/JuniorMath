@@ -14,6 +14,7 @@ namespace JuniorMath.ApplicationCore.DTOs.Exam
         public int QuestionImageSettingId { get; set; }
         public string ImageName { get; set; }
         public int Count { get; set; }
+        public int Marks { get; set; }
         public string GroupName { get; set; }
         public Expression<Func<Entities.QuestionAggregate.QuestionDetail, QuestionDetailModel>> CreateResult()
         {
@@ -21,6 +22,7 @@ namespace JuniorMath.ApplicationCore.DTOs.Exam
             {
                 QuestionDetailId = m.Id,
                 Count = m.Count,
+                Marks = m.Marks,
                 GroupName = m.GroupName,
                 ImageName = m.QuestionImageSettingIdNavigation.ImageName,
                 QuestionId = m.QuestionId,
@@ -36,6 +38,7 @@ namespace JuniorMath.ApplicationCore.DTOs.Exam
                 {
                     QuestionDetailId = source.Id,
                     Count = source.Count,
+                    Marks = source.Marks,
                     GroupName = source.GroupName,
                     ImageName = source.QuestionImageSettingIdNavigation.ImageName,
                     QuestionId = source.QuestionId,
@@ -54,6 +57,7 @@ namespace JuniorMath.ApplicationCore.DTOs.Exam
                 {
                     Id = source.QuestionDetailId ,
                     Count = source.Count,
+                    Marks = source.Marks,
                     GroupName = source.GroupName,
                     QuestionId = source.QuestionId,
                     QuestionImageSettingId = source.QuestionImageSettingId

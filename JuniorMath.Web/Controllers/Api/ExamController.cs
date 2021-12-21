@@ -41,7 +41,9 @@ namespace JuniorMath.Web.Controllers.Api
         [HttpPost]
         public IActionResult Post([FromBody] ExamRequestModel exam)
         {
-            int siteUserId = _userContext.SiteUserId;
+            exam.SiteUserId = _userContext.SiteUserId;
+            exam.SubmitDate = DateTime.Now;
+
 
             return Json(exam);
         }

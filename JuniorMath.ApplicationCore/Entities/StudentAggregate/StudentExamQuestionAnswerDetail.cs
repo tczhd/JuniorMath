@@ -12,7 +12,7 @@ namespace JuniorMath.ApplicationCore.Entities.StudentAggregate
         }
         public int StudentExamQuestionAnswerId { get; set; }
         public int QuestionDetailId { get; set; }
-        public int AnswerCounts { get; set; }
+        public int? AnswerCounts { get; set; }
         public virtual StudentExamQuestionAnswer StudentExamQuestionAnswerIdNavigation { get; set; }
         public virtual QuestionDetail QuestionDetailIdNavigation { get; set; }
     }

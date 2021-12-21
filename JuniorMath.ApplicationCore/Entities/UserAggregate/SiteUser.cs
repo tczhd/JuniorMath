@@ -16,7 +16,6 @@ namespace JuniorMath.ApplicationCore.Entities.UserAggregate
             QuestionCreatedByCollection = new HashSet<Question>();
             ExamCreatedByCollection = new HashSet<Exam>();
             StudentExamCreatedByCollection = new HashSet<StudentExam>();
-            StudentExamSiteUserIdCollection = new HashSet<StudentExam>();
         }
 
         public string FirstName { get; set; }
@@ -35,7 +34,6 @@ namespace JuniorMath.ApplicationCore.Entities.UserAggregate
         public virtual ICollection<Question> QuestionCreatedByCollection { get; set; }
         public virtual ICollection<StudentExamQuestionAnswer> StudentExamQuestionAnswerCollection { get; set; }
         public virtual ICollection<Exam> ExamCreatedByCollection { get; set; }
-        public virtual ICollection<StudentExam> StudentExamSiteUserIdCollection { get; set; }
         public virtual ICollection<StudentExam> StudentExamCreatedByCollection { get; set; }
     }
 }

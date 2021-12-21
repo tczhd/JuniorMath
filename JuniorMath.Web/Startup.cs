@@ -167,7 +167,7 @@ namespace JuniorMath.Web
 
         private void ConfigureWebService(IServiceCollection services)
         {
-            services.AddScoped<IRazorViewToStringRenderer, RazorViewToStringRenderer>();
+            //services.AddScoped<IRazorViewToStringRenderer, RazorViewToStringRenderer>();
         }
 
         private void ConfigureApplicatiojnService(IServiceCollection services)
