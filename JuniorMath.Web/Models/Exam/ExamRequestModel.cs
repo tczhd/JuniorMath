@@ -15,7 +15,7 @@ namespace JuniorMath.Web.Models.Exam
         [DataMember(Name = "site_user_id")]
         public int SiteUserId { get; set; }
         [DataMember(Name = "submit_date")]
-        public DateTime SubmitDate { get; set; }
+        public DateTime SubmittedDate { get; set; }
         [DataMember(Name = "student_exam_id")]
         public int StudentExamId { get; set; }
         [DataMember(Name = "marks")]
@@ -29,6 +29,8 @@ namespace JuniorMath.Web.Models.Exam
             {
                 ExamId = source.ExamId,
                 SubmittedBy = source.SiteUserId,
+                Submitted = true,
+                SubmittedDate = source.SubmittedDate,
                 Questions = source.Questions
                 .Select(p => (StudentExamQuestionAnswerSubmitModel)p).ToList()
             };
@@ -42,8 +44,7 @@ namespace JuniorMath.Web.Models.Exam
                 SiteUserId = source.SubmittedBy,
                 marks = source.TotalMarks,
                 StudentExamId = source.StudentExamId,
-                SubmitDate = source.SubmitDate
-           
+                SubmittedDate = source.SubmittedDate
             };
         }
     }

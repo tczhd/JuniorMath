@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace JuniorMath.ApplicationCore.DTOs.StudentExam.Submit
 {
@@ -22,6 +23,8 @@ namespace JuniorMath.ApplicationCore.DTOs.StudentExam.Submit
                 Answers = source.Answers,
                 Marks = source.Marks,
                 StudentExamId = source.StudentExamId,
+                StudentExamQuestionAnswerDetailCollection = source.QuestionDetails
+                .Select(p => (StudentExamQuestionAnswerDetail)p).ToList()
             };
         }
     }

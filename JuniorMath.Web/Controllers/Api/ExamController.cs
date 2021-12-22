@@ -42,10 +42,10 @@ namespace JuniorMath.Web.Controllers.Api
         public IActionResult Post([FromBody] ExamRequestModel exam)
         {
             exam.SiteUserId = _userContext.SiteUserId;
-            exam.SubmitDate = DateTime.Now;
+            exam.SubmittedDate = DateTime.Now;
 
-
-            return Json(exam);
+            var result = _examService.SubmitStudentExamAsync(exam);
+            return Json((ExamRequestModel)result);
         }
 
     }

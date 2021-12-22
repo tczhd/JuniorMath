@@ -64,38 +64,48 @@ namespace JuniorMath.ApplicationCore.Services.ExaminationPaper
         {
             try
             {
-                var exam = _examRepository.GetById(studentExamSubmitModel.ExamId);
+                var studentExamSubmit = GetStudentExamMarks(studentExamSubmitModel);
 
-                var studentExam = studentExamSubmitModel;
-                foreach (var question in studentExam.Questions)
-                {
-                    foreach (var questionDetail in question.QuestionDetails)
-                    { 
-                        
-                    }
-                }
-                //var invoice = (Invoice)invoiceModel;
-                //if (invoiceModel.ReOccouring)
-                //{
-                //    var patient = _patientRepository.GetById(invoice.PatientId);
-                //    patient.SubscriptionExpireDate = invoice.InvoiceDate.AddYears(1);
-                //    patient.UpdatedDateUtc = DateTime.UtcNow;
-                //    _patientRepository.UpdateOnly(patient);
-                //}
+                var studentExam = (StudentExam)studentExamSubmit;
 
-                //_invoiceRepository.AddOnly(invoice);
+                var data = _studentExamRepository.Add(studentExam);
+                _studentExamRepository.SaveAll();
 
-                //_invoiceRepository.SaveAll();
-
-                //invoiceModel.InvoiceId = invoice.Id;
-                //invoiceModel.DisplayId = invoice.DisplayId;
-
-                return new StudentExamSubmitModel();
+                return (StudentExamSubmitModel)data;
             }
             catch (Exception ex)
             {
                 throw new Exception("Submit student exam failed: " + ex.Message);
             }
+        }
+
+        private StudentExamSubmitModel GetStudentExamMarks(StudentExamSubmitModel studentExamSubmitModel)
+        {
+            var exam = GetExam(studentExamSubmitModel.ExamId);
+
+            var studentExam = studentExamSubmitModel;
+            studentExam.TotalMarks = 0;
+            foreach (var studentQuestionAnswer in studentExam.Questions)
+            {
+                var quetion = exam.Questions
+                    .First(p => p.QuestionId == studentQuestionAnswer.QuestionId);
+
+                studentQuestionAnswer.SiteUserId = studentExam.SubmittedBy;
+                studentQuestionAnswer.Marks = 0;
+                foreach (var studentQuestionAnswerDetail in studentQuestionAnswer.QuestionDetails)
+                {
+                    var questionDetail = quetion.QuestionDetail
+                        .First(p => p.QuestionDetailId == studentQuestionAnswerDetail.QuestionDetailId);
+                    if (studentQuestionAnswerDetail.QuestionDetailAnswerCount == questionDetail.Count)
+                    {
+                        studentQuestionAnswer.Marks += questionDetail.Marks;
+                    }
+                }
+
+                studentExam.TotalMarks += studentQuestionAnswer.Marks??0;
+            }
+
+            return studentExam;
         }
     }
 }

@@ -89,7 +89,7 @@ JuniorMath.ExamPaper = {
             data: jsonData,
             success: function (result) {
 
-                Alert("success");
+                alert("success");
                 //window.location.replace('/Invoice/InvoiceDetail?invoiceId=' + result.displayId);
 
             }, //End of AJAX Success function  
