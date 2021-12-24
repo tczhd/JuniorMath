@@ -9,9 +9,11 @@ namespace JuniorMath.ApplicationCore.Interfaces.Services.ExaminationPaper
 {
     public interface IExamService
     {
+        ExamModel GetExam(int examId);
         List<ExamModel> GetExams(bool? active);
         List<StudentExamModel> GetStudentExams(int studentSiteUserId);
-        ExamModel GetExam(int examId);
+        StudentExamModel GetStudentExam(int studentExamId);
+    
         StudentExamSubmitModel SubmitStudentExamAsync(StudentExamSubmitModel studentExamSubmitModel);
     }
 }

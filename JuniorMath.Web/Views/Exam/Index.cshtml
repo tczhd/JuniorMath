@@ -66,7 +66,6 @@
                                 <tr>
                                     <th>EXAM NAME</th>
                                     <th>EXAM Description</th>
-                                    <th>CREATE DATE</th>
                                     <th>TEACHER</th>
                                     <th>SUBMITTED DATE</th>
                                     <th>MARKS</th>
@@ -78,13 +77,14 @@
                                 {
                                     @foreach (var item in Model.StudentExams)
                                     {
-                                        <tr>
-                                            <td>@Html.DisplayFor(modelItem => item.ExamName)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.CreateDate)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Teacher)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Active)</td>
-                                        </tr>
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.ExamName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Teacher)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.SubmittedDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TotalMarks)</td>
+                                    <td>Submitted</td>
+                                </tr>
                                     }
                                 }
 

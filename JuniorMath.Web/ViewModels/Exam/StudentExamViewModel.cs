@@ -9,6 +9,8 @@ namespace JuniorMath.Web.ViewModels.Exam
 {
     public class StudentExamViewModel
     {
+        [Display(Name = "Student Exam Id")]
+        public int StudentExamId { get; set; }
         [Display(Name = "Exam Id")]
         public int ExamId { get; set; }
         [Display(Name = "Exam Name")]
@@ -19,6 +21,10 @@ namespace JuniorMath.Web.ViewModels.Exam
         public DateTime CreateDate { get; set; }
         [Display(Name = "Created By")]
         public int CreatedBy { get; set; }
+        [Display(Name = "Submitted Date")]
+        public DateTime SubmittedDate { get; set; }
+        [Display(Name = "Total Marks")]
+        public int TotalMarks { get; set; }
         [Display(Name = "Teacher")]
         public string Teacher { get; set; }
         [Display(Name = "Status")]
@@ -28,12 +34,15 @@ namespace JuniorMath.Web.ViewModels.Exam
         {
             return new StudentExamViewModel
             {
-                ExamId = source.Id,
+                StudentExamId = source.StudentExamId,
+                ExamId = source.ExamId,
                 Teacher = source.Teacher,
                 Active = source.Active,
                 CreateDate = source.CreatedDate,
                 Description = source.ExamDescription,
-                ExamName = source.ExamName
+                ExamName = source.ExamName,
+                TotalMarks = source.TotalMarks??0,
+                SubmittedDate = source.SubmittedDate
             };
         }
     }

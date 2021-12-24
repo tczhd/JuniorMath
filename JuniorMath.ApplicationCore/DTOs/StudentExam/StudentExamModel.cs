@@ -9,7 +9,7 @@ namespace JuniorMath.ApplicationCore.DTOs.StudentExam
 {
     public class StudentExamModel : IResultable<Entities.StudentAggregate.StudentExam, StudentExamModel>
     {
-        public int Id { get; set; }
+        public int StudentExamId { get; set; }
         public int ExamId { get; set; }
         public string ExamName { get; set; }
         public string ExamDescription { get; set; }
@@ -30,7 +30,7 @@ namespace JuniorMath.ApplicationCore.DTOs.StudentExam
         {
             return m => new StudentExamModel
             {
-                Id = m.Id,
+                StudentExamId = m.Id,
                 ExamId = m.EaxmId,
                 ExamName = m.ExamIdNavigation.Name,
                 ExamDescription = m.ExamIdNavigation.Description,
@@ -50,11 +50,13 @@ namespace JuniorMath.ApplicationCore.DTOs.StudentExam
             {
                 return new StudentExamModel
                 {
-                    Id = source.Id,
+                    StudentExamId = source.Id,
                     ExamId = source.EaxmId,
                     ExamName = source.ExamIdNavigation.Name,
                     ExamDescription = source.ExamIdNavigation.Description,
+                    Teacher = source.ExamIdNavigation.CreatedByNavigation.FirstName + " " + source.ExamIdNavigation.CreatedByNavigation.LastName,
                     Notes = source.Notes,
+                    SubmittedName = source.SubmittedByNavigation.FirstName + " " + source.SubmittedByNavigation.LastName,
                     SubmittedBy = source.SubmittedBy,
                     TotalMarks = source.TotalMarks,
                     Submitted = source.Submitted,
@@ -71,7 +73,7 @@ namespace JuniorMath.ApplicationCore.DTOs.StudentExam
             {
                 return new Entities.StudentAggregate.StudentExam
                 {
-                    Id = source.Id,
+                    Id = source.StudentExamId,
                     EaxmId = source.ExamId,
                     Notes = source.Notes,
                     SubmittedBy = source.SubmittedBy,

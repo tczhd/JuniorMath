@@ -14,6 +14,10 @@ namespace JuniorMath.ApplicationCore.Specifications.ExaminationPaper
             AddInclude(b => b.ExamIdNavigation);
         }
 
+        public void AddStudentExamId(int studentExamId)
+        {
+            AddCriteria(q => q.Id == studentExamId);
+        }
         public void AddStudentSiteUserId(int siteUserId)
         {
             AddCriteria(q => q.SubmittedBy == siteUserId);

@@ -38,6 +38,11 @@ namespace JuniorMath.Web.Controllers
                 ViewData["Title"] = $"Exam Paper";
                 return GetExamPaperView(id, view);
             }
+            else if (view == "ExamPaperResult")
+            {
+                ViewData["Title"] = $"Exam Paper Result";
+                return GetStudentExamPaperView(id, view);
+            }
             else {
                 return View();
             }
@@ -51,6 +56,9 @@ namespace JuniorMath.Web.Controllers
 
             var studentExams = _examService.GetStudentExams(_userContext.SiteUserId);
             examGroupViewModel.StudentExams = studentExams.Select(p => (StudentExamViewModel)p).ToList();
+            var submittedExamIds = examGroupViewModel.StudentExams.Select(p => p.ExamId).ToList();
+            examGroupViewModel.Exams = examGroupViewModel.Exams
+                .Where(p => !submittedExamIds.Contains(p.ExamId)).ToList();
 
             return View(examGroupViewModel);
         }
@@ -60,6 +68,18 @@ namespace JuniorMath.Web.Controllers
             var exam = _examService.GetExam(examId);
             var data = (ExamViewModel)exam;
             return View(view, data);
+        }
+
+        private ViewResult GetStudentExamPaperView(int studentExamId, string view)
+        {
+            var exam = _examService.GetStudentExam(studentExamId);
+            if (exam != null)
+            {
+                var data = (StudentExamViewModel)exam;
+                return View(view, data);
+            }
+
+            return new ViewResult();
         }
     }
 }

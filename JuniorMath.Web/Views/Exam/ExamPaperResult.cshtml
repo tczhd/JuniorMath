@@ -1,0 +1,55 @@
+﻿@using  JuniorMath.Web.ViewModels.Exam
+
+@model StudentExamViewModel
+
+@{
+    ViewData["Title"] = "Submit Exam Result";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="animated fadeIn  view-exam-paper-content">
+    <img id="search-spinner" class="invisible" src='/images/loading.gif' width='30' height='30' />
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header exam-id">
+                    <i class="fa fa-align-justify"></i>Submit Exam Result
+                    <input type="hidden" asp-for="StudentExamId" id="EaxmHidden-@Model.StudentExamId" class="hidden-student-exam-id" />
+                </div>
+                <div class="card-body">
+                    @if (Model != null)
+                    {
+                        <div class="row">
+                            <div class="col-3">
+                                Teacher:
+                            </div>
+                            <div class="col-9">
+                                @Model.Teacher
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                Total Marks:
+                            </div>
+                            <div class="col-9">
+                                @Model.TotalMarks
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col-12">
+                                No result
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+    <!--/.row-->
+
+</div>

@@ -48,6 +48,16 @@ namespace JuniorMath.ApplicationCore.Services.ExaminationPaper
             return result;
         }
 
+        public StudentExamModel GetStudentExam(int studentExamId)
+        {
+            var examSpecification = new StudentExamSpecification();
+            examSpecification.AddStudentExamId(studentExamId);
+
+            var data = _studentExamRepository.GetSingleBySpec(examSpecification);
+
+            return (StudentExamModel)data;
+        }
+
         public List<StudentExamModel> GetStudentExams(int studentSiteUserId)
         {
             var examSpecification = new StudentExamSpecification();
