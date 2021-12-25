@@ -204,7 +204,7 @@ namespace JuniorMath.Infrastructure.Data
                 .IsRequired()
                 .HasMaxLength(1000);
 
-                entity.HasIndex(m => new { m.Name }).IsUnique();
+                entity.HasIndex(m => new { m.ExamId, m.Name }).IsUnique();
 
                 entity.HasOne(d => d.ExamIdNavigation)
                 .WithMany(p => p.QuestionCollection)
