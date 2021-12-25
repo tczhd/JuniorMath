@@ -105,6 +105,10 @@ namespace JuniorMath.Web.Controllers
                 }
                 AddErrors(result);
             }
+            else
+            {
+                ModelState.AddModelError("", "Invlaid ");
+            }
             // If we got this far, something failed, redisplay form
             return View(model);
         }

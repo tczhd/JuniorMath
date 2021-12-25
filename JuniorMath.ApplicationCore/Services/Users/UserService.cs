@@ -2,6 +2,7 @@
 using JuniorMath.ApplicationCore.DTOs.Common;
 using JuniorMath.ApplicationCore.DTOs.User;
 using JuniorMath.ApplicationCore.Entities.UserAggregate;
+using JuniorMath.ApplicationCore.Enums;
 using JuniorMath.ApplicationCore.Interfaces.Repository;
 using JuniorMath.ApplicationCore.Interfaces.Services.Users;
 using JuniorMath.ApplicationCore.Specifications.Users;
@@ -83,12 +84,31 @@ namespace JuniorMath.ApplicationCore.Services.Users
 
         public List<SiteUserModel> SearchSiteUsers()
         {
+            var userContext = _userHandler.GetUserContext();
+            var userLevelTypes = new List<SiteUserLevelType>();
+
+            switch ((SiteUserLevelType)userContext.SiteUserLevelId)
+            {
+                case SiteUserLevelType.Student:
+                    userLevelTypes.Add(SiteUserLevelType.Student);
+                    break;
+                case SiteUserLevelType.Teacher:
+                    userLevelTypes.Add(SiteUserLevelType.Teacher);
+                    userLevelTypes.Add(SiteUserLevelType.Student);
+                    break;
+                 default:
+                    userLevelTypes.Add(SiteUserLevelType.Teacher);
+                    userLevelTypes.Add(SiteUserLevelType.Student);
+                    userLevelTypes.Add(SiteUserLevelType.AdminUser);
+                    break;
+            }
 
             var searchSiteUserSpecification = new SearchSiteUserSpecification();
+            searchSiteUserSpecification.AddSiteUserLevels(userLevelTypes);
 
-            var data = _siteUserRepository.List(searchSiteUserSpecification).ToList();
+            var users = _siteUserRepository.List(searchSiteUserSpecification).ToList();
 
-            var result = data.Select(p => new SiteUserModel {
+            var result = users.Select(p => new SiteUserModel {
                 Email = p.Email,
                 FirstName = p.FirstName,
                 LastName = p.LastName,
