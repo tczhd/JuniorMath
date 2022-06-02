@@ -33,7 +33,7 @@ namespace JuniorMath.Web.Controllers
                 ViewData["Title"] = $"Exam List";
                 return GetIndexView();
             }
-            else if(view == "ExamPaper")
+            else if (view == "ExamPaper")
             {
                 ViewData["Title"] = $"Exam Paper";
                 return GetExamPaperView(id, view);
@@ -43,9 +43,25 @@ namespace JuniorMath.Web.Controllers
                 ViewData["Title"] = $"Exam Paper Result";
                 return GetStudentExamPaperView(id, view);
             }
-            else {
+            else if (view == "AddExam") {
+                return View(view, null);
+            }
+            else
+            {
                 return View();
             }
+        }
+
+        [Route("{view=AddExam}")]
+        public IActionResult AddExam(string view)
+        {
+            if (view == "AddExam")
+            {
+                ViewData["Title"] = $"Add Exam";
+              
+            }
+
+            return View();
         }
 
         private ViewResult GetIndexView()
