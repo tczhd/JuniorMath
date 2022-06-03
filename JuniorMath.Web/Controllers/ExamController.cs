@@ -43,7 +43,8 @@ namespace JuniorMath.Web.Controllers
                 ViewData["Title"] = $"Exam Paper Result";
                 return GetStudentExamPaperView(id, view);
             }
-            else if (view == "AddExam") {
+            else if (view == "AddExam")
+            {
                 return View(view, null);
             }
             else
@@ -52,16 +53,18 @@ namespace JuniorMath.Web.Controllers
             }
         }
 
-        [Route("{view=AddExam}")]
-        public IActionResult AddExam(string view)
+        [HttpPost]
+        public ActionResult AddExam(AddExamViewModel addExamViewModel)
         {
-            if (view == "AddExam")
-            {
-                ViewData["Title"] = $"Add Exam";
-              
+            var result = _examService.SubmitNewExamAsync(_userContext.SiteUserId, addExamViewModel.ExamName,
+                addExamViewModel.Description, addExamViewModel.QuestionTotal);
+            if (result)
+            { 
+                return View();
             }
-
-            return View();
+            else { 
+                return View(); 
+            }
         }
 
         private ViewResult GetIndexView()

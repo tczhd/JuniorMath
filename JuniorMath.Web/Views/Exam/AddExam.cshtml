@@ -1,8 +1,53 @@
-﻿
+﻿@model JuniorMath.Web.ViewModels.Exam.AddExamViewModel
+
+
 @{
     ViewData["Title"] = "AddExam";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>AddExam</h2>
+@using (Html.BeginForm("AddExam", "Exam", FormMethod.Post))
+{
 
+    <div class="animated fadeIn add-exam-form">
+        <div id="user-form-page-container">
+            <div class="user-page-content">
+                <div class="user-info-form-card">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group user-firstname">
+                                <label for="ExamName">Exam Name</label>
+                                <input asp-for="ExamName" class="form-control" width="20"
+                                       placeholder="" autocomplete="off" list="autocompleteOff" required />
+                                <span asp-validation-for="ExamName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group user-firstname">
+                                <label for="QuestionTotal">Question Total</label>
+                                <input asp-for="QuestionTotal" class="form-control" width="20"
+                                       placeholder="" autocomplete="off" list="autocompleteOff" required />
+                                <span asp-validation-for="QuestionTotal" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group user-firstname">
+                                <label for="Description">Description</label>
+                                <input asp-for="Description" class="form-control" width="80"
+                                       placeholder="" autocomplete="off" list="autocompleteOff" required />
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-button-group add-patient-buttons">
+                    <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

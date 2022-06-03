@@ -13,6 +13,7 @@ namespace JuniorMath.ApplicationCore.DTOs.Exam
         public int QuestionId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public int QuestionType { get; set; }
         public string CorrectAnswers { get; set; }
         public int Marks { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -27,6 +28,7 @@ namespace JuniorMath.ApplicationCore.DTOs.Exam
                 CorrectAnswers = m.CorrectAnswers,
                 Active = m.Active,
                 QuestionId = m.Id,
+                QuestionType = m.QuestionType,
                 CreatedBy = m.CreatedBy,
                 CreatedDate = m.CreatedDate,
                 Description = m.Description,
@@ -47,6 +49,7 @@ namespace JuniorMath.ApplicationCore.DTOs.Exam
                     Active = source.Active,
                     QuestionId = source.Id,
                     CreatedBy = source.CreatedBy,
+                    QuestionType = source.QuestionType,
                     CreatedDate = source.CreatedDate,
                     Description = source.Description,
                     ExamId = source.ExamId,
@@ -68,6 +71,7 @@ namespace JuniorMath.ApplicationCore.DTOs.Exam
                     CorrectAnswers = source.CorrectAnswers,
                     Active = source.Active,
                     Id = source.QuestionId,
+                    QuestionType = source.QuestionType,
                     CreatedBy = source.CreatedBy,
                     CreatedDate = source.CreatedDate,
                     Description = source.Description,

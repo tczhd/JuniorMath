@@ -1,5 +1,7 @@
 ﻿using JuniorMath.ApplicationCore.DTOs.Common;
+using JuniorMath.ApplicationCore.DTOs.Question;
 using JuniorMath.ApplicationCore.Entities;
+using JuniorMath.ApplicationCore.Entities.QuestionAggregate;
 using JuniorMath.ApplicationCore.Entities.SettingsAggregate;
 using JuniorMath.ApplicationCore.Entities.UserAggregate;
 using JuniorMath.ApplicationCore.Interfaces.Repository;
@@ -15,13 +17,17 @@ namespace JuniorMath.ApplicationCore.Services.Utiliites
         private readonly IRepository<Country> _countryRepository;
         private readonly IRepository<Region> _regionRepository;
         private readonly IRepository<SiteUserLevel> _siteUserLevelRepository;
+        private readonly IRepository<QuestionImageSetting> _questionImageSettingRepository;
+
         public UtilityService(IRepository<Country> countryRepository
             , IRepository<Region> regionRepository
-            , IRepository<SiteUserLevel> siteUserLevelRepository)
+            , IRepository<SiteUserLevel> siteUserLevelRepository
+            , IRepository<QuestionImageSetting> questionImageSettingRepository)
         {
             _countryRepository = countryRepository;
             _regionRepository = regionRepository;
             _siteUserLevelRepository = siteUserLevelRepository;
+            _questionImageSettingRepository = questionImageSettingRepository;
         }
         public List<ListItemModel> GetCountries()
         {
@@ -51,6 +57,13 @@ namespace JuniorMath.ApplicationCore.Services.Utiliites
                 Id = p.Id,
                 Name = p.Name
             }).ToList();
+
+            return data;
+        }
+
+        public List<QuestionImageSettingModel> GetQuestionImageSettingModels()
+        {
+            var data = _questionImageSettingRepository.ListAll().Select(p => (QuestionImageSettingModel)p).ToList();
 
             return data;
         }

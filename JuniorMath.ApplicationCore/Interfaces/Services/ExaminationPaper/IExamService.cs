@@ -13,7 +13,7 @@ namespace JuniorMath.ApplicationCore.Interfaces.Services.ExaminationPaper
         List<ExamModel> GetExams(bool? active);
         List<StudentExamModel> GetStudentExams(int studentSiteUserId);
         StudentExamModel GetStudentExam(int studentExamId);
-    
         StudentExamSubmitModel SubmitStudentExamAsync(StudentExamSubmitModel studentExamSubmitModel);
+        bool SubmitNewExamAsync(int creadteBy, string examName, string description, int questions);
     }
 }

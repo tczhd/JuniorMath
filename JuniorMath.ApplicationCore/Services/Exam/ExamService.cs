@@ -4,9 +4,13 @@ using JuniorMath.ApplicationCore.DTOs.StudentExam;
 using JuniorMath.ApplicationCore.DTOs.StudentExam.Submit;
 using JuniorMath.ApplicationCore.DTOs.User;
 using JuniorMath.ApplicationCore.Entities.ExamAggregate;
+using JuniorMath.ApplicationCore.Entities.QuestionAggregate;
 using JuniorMath.ApplicationCore.Entities.StudentAggregate;
+using JuniorMath.ApplicationCore.Enums;
 using JuniorMath.ApplicationCore.Interfaces.Repository;
 using JuniorMath.ApplicationCore.Interfaces.Services.ExaminationPaper;
+using JuniorMath.ApplicationCore.Interfaces.Services.Utiliites;
+using JuniorMath.ApplicationCore.Services.Utiliites;
 using JuniorMath.ApplicationCore.Specifications.Exam;
 using JuniorMath.ApplicationCore.Specifications.ExaminationPaper;
 using System;
@@ -19,12 +23,18 @@ namespace JuniorMath.ApplicationCore.Services.ExaminationPaper
     {
         private readonly IRepository<StudentExam> _studentExamRepository;
         private readonly IRepository<Exam> _examRepository;
-
-        public ExamService(IRepository<Exam> examRepository,
-            IRepository<StudentExam> studentExamRepository)
+        private readonly IRepository<Question> _questionRepository;
+        private readonly IRepository<QuestionDetail> _questionDetailRepository;
+        private readonly IUtilityService _utilityService;
+        public ExamService(IRepository<Exam> examRepository, IRepository<Question> questionRepository,
+            IRepository<QuestionDetail> questionDetailRepository, IRepository<StudentExam> studentExamRepository,
+            IUtilityService utilityService)
         {
             _examRepository = examRepository;
             _studentExamRepository = studentExamRepository;
+            _questionRepository = questionRepository;
+            _questionDetailRepository = questionDetailRepository;
+            _utilityService = utilityService;
         }
 
         public ExamModel GetExam(int examId)
@@ -89,6 +99,78 @@ namespace JuniorMath.ApplicationCore.Services.ExaminationPaper
             }
         }
 
+        public bool SubmitNewExamAsync(int creadteBy, string examName, string description, int questions)
+        {
+            try
+            {
+                var imageSettings = _utilityService.GetQuestionImageSettingModels();
+                var newExam = new ExamModel()
+                {
+                    Name = examName,
+                    Description = description,
+                    CreatedDate = DateTime.Now,
+                    CreatedBy = creadteBy,
+                    Active = true
+                };
+                var createdExam = _examRepository.Add(newExam);
+
+                var newQuestions = new List<QuestionModel>();
+                for (int i = 0; i < questions; i++)
+                {
+                    var question = new QuestionModel()
+                    {
+                        ExamId = createdExam.Id,
+                        Name = $"Question {i + 1}",
+                        QuestionType = (int)QuestionType.ImageCount,
+                        Description = QuestionType.ImageCount.ToString(),
+                        CorrectAnswers = string.Empty,
+                        Marks = 100,
+                        CreatedDate = DateTime.Now,
+                        CreatedBy = creadteBy,
+                        Active = true
+                    };
+
+                    
+                    var data = _questionRepository.Add(question);
+                    newQuestions.Add(data);
+                }
+
+                Random rand = new Random();
+
+                foreach (var question in newQuestions)
+                {
+                    int questionDetailCount = rand.Next(3, 10);
+                    var totalMark = 100;
+                    var eachQuestionMark = totalMark / questionDetailCount;
+                    for (int i = 0; i < questionDetailCount; i++)
+                    {
+                        int imagesCount = rand.Next(4, 25);
+                        int imageId = imageSettings[ rand.Next(imageSettings.Count())].QuestionImageSettingId;
+                        
+
+                         var questionDetail = new QuestionDetailModel() {
+                            QuestionId = question.QuestionId,
+                            QuestionImageSettingId = imageId,
+                            Count = imagesCount,
+                            Marks = (i == questionDetailCount -1 )? totalMark:eachQuestionMark,
+                            GroupName = "Group1"
+                         };
+
+                        _questionDetailRepository.AddOnly(questionDetail);
+                        totalMark -= eachQuestionMark;
+                    }
+                }
+
+                _questionDetailRepository.SaveAll();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         private StudentExamSubmitModel GetStudentExamMarks(StudentExamSubmitModel studentExamSubmitModel)
         {
             var exam = GetExam(studentExamSubmitModel.ExamId);
@@ -112,7 +194,7 @@ namespace JuniorMath.ApplicationCore.Services.ExaminationPaper
                     }
                 }
 
-                studentExam.TotalMarks += studentQuestionAnswer.Marks??0;
+                studentExam.TotalMarks += studentQuestionAnswer.Marks ?? 0;
             }
 
             return studentExam;
