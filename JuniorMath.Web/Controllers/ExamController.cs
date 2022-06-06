@@ -59,8 +59,8 @@ namespace JuniorMath.Web.Controllers
             var result = _examService.SubmitNewExamAsync(_userContext.SiteUserId, addExamViewModel.ExamName,
                 addExamViewModel.Description, addExamViewModel.QuestionTotal);
             if (result)
-            { 
-                return View();
+            {
+                return Redirect("/Exam");
             }
             else { 
                 return View(); 
