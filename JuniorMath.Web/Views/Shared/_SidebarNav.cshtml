@@ -20,12 +20,14 @@
                 <i class="fas fa-file-invoice-dollar"></i> Exams
             </a>
             <ul class="nav-dropdown-items">
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Exam" asp-action="Index" asp-route-view="AddExam">
-                        <i></i>Add Exam
-                    </a>
-                </li>
-
+                @if (userContext.SiteUserLevelId == (int)SiteUserLevelType.AdminUser)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Exam" asp-action="Index" asp-route-view="AddExam">
+                            <i></i>Add Exam
+                        </a>
+                    </li>
+                }
             </ul>
         </li>
 
